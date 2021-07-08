@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { SourcesService } from './sources.service';
-import { SourcesController } from './sources.controller';
+import { SourcesResolver } from './sources.resolver';
 
 import { MongooseModule } from '@nestjs/mongoose';
-import { SourcesSchema } from './schemas/sources.schema';
+import { SourcesSchema } from './model/sources.model';
 
 
 
@@ -11,8 +11,8 @@ import { SourcesSchema } from './schemas/sources.schema';
   imports: [
     MongooseModule.forFeature([{ name: 'Sources', schema: SourcesSchema }]),
   ],
-  providers: [SourcesService],
-  controllers: [SourcesController]
+  providers: [SourcesService, SourcesResolver],
+ 
 })
 export class SourcesModule { }
 

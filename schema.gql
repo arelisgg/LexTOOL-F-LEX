@@ -1,0 +1,87 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
+type CreatedSourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
+type EntryType {
+  id: ID!
+  lemma: String!
+  letter: String!
+  ref: String!
+  context: String!
+  UF: String!
+  source: SourcesType!
+}
+
+type CreatedEntryType {
+  id: ID!
+  lemma: String!
+  letter: String!
+  ref: String!
+  context: String!
+  UF: String!
+  source: SourcesType!
+}
+
+type LemarioType {
+  id: ID!
+  name: String!
+  dictionaryType: String!
+  entries: [EntryType!]!
+}
+
+type CreatedLemarioType {
+  id: ID!
+  name: String!
+  dictionaryType: String!
+  entries: [EntryType!]!
+}
+
+type Query {
+  findAllLemarios: [LemarioType!]!
+  findAllEntries: [EntryType!]!
+  findAllSources: [SourcesType!]!
+}
+
+type Mutation {
+  createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
+  createEntryByLemarioID(lemarioID: String!, newEntry: NewEntryType!): EntryType!
+  deleteLemarioByID(lemarioID: String!): LemarioType!
+  createEntry(createdEntry: NewEntryType!): CreatedEntryType!
+  deleteEntryByID(entryID: String!): EntryType!
+  createSource(source: NewSourcesType!): CreatedSourcesType!
+}
+
+input NewLemarioType {
+  name: String!
+  dictionaryType: String!
+  entries: [NewEntryType!]
+}
+
+input NewEntryType {
+  lemma: String!
+  letter: String!
+  ref: String!
+  context: String!
+  UF: String!
+  source: String!
+}
+
+input NewSourcesType {
+  name: String!
+  ref: String!
+  file: String!
+}

@@ -1,14 +1,21 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { EntryModule } from './entry/entry.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LemarioModule } from './lemario/lemario.module';
 import { SourcesModule } from './sources/sources.module';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
-  imports: [EntryModule, MongooseModule.forRoot('mongodb://localhost/miBD'), LemarioModule, SourcesModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost/Dictionary', {
+      useFindAndModify: false,
+    }),
+    GraphQLModule.forRoot({ autoSchemaFile: 'schema.gql' }),
+    LemarioModule,
+    SourcesModule,
+    EntryModule,
+
+  ],
 })
-export class AppModule { }
+export class AppModule {}
+

@@ -45,13 +45,17 @@ export class EntryService {
       model: 'Sources',
     });
   }
-  
-  
-  async getEntry(entryID: string): Promise<Entry> {
-    const entry = await this.entryModel.findById(entryID);
+    
+  async findByID(entryID: String){
+    const entry = await this.entryModel.findById(entryID)
+     .populate({
+      path: 'source',
+      model: 'Sources',
+    })
+    .exec();
     return entry;
   }
-
+  
   async deleteEntry(entryID: String) {
     const e = await (await this.entryModel.findById(entryID)).populate({
       path: 'source',

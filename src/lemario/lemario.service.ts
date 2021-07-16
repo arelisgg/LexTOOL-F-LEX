@@ -60,8 +60,11 @@ export class LemarioService {
         }
       }
     
-    async getLemario(lemarioID: string): Promise<Lemario> {
-        const lemario = await this.lemarioModel.findById(lemarioID);
+    async findByID(lemarioID: String) {
+        const lemario = await this.lemarioModel.findById(lemarioID).populate({
+          path: 'entries',
+          model: 'Entry',
+        });
         return lemario;
     }
 

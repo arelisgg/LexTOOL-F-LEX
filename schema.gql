@@ -2,14 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type SourcesType {
+type DictionarySourcesType {
   id: ID!
   name: String!
   ref: String!
   file: String!
 }
 
-type CreatedSourcesType {
+type EntrySourcesType {
   id: ID!
   name: String!
   ref: String!
@@ -23,7 +23,7 @@ type EntryType {
   ref: String!
   context: String!
   UF: String!
-  source: SourcesType!
+  source: EntrySourcesType!
 }
 
 type CreatedEntryType {
@@ -33,7 +33,7 @@ type CreatedEntryType {
   ref: String!
   context: String!
   UF: String!
-  source: SourcesType!
+  source: EntrySourcesType!
 }
 
 type LemarioType {
@@ -50,19 +50,56 @@ type CreatedLemarioType {
   entries: [EntryType!]!
 }
 
+type DictionaryType {
+  id: ID!
+  name: String!
+  reference: String!
+  description: String!
+  state: String!
+  letters: [String!]!
+  sources: [DictionarySourcesType!]!
+  lemario: LemarioType!
+}
+
+type CreatedDictionaryType {
+  id: ID!
+  name: String!
+  reference: String!
+  description: String!
+  state: String!
+  letters: [String!]!
+  sources: [String!]!
+  lemario: LemarioType!
+}
+
 type Query {
+  getAllDictionaries: [DictionaryType!]!
   findAllLemarios: [LemarioType!]!
   findAllEntries: [EntryType!]!
-  findAllSources: [SourcesType!]!
 }
 
 type Mutation {
+  createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
   createEntryByLemarioID(lemarioID: String!, newEntry: NewEntryType!): EntryType!
   deleteLemarioByID(lemarioID: String!): LemarioType!
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
-  createSource(source: NewSourcesType!): CreatedSourcesType!
+}
+
+input NewDictionaryType {
+  name: String!
+  reference: String!
+  description: String!
+  state: String!
+  letters: [String!]!
+  sources: [NewSourcesType!]
+}
+
+input NewSourcesType {
+  name: String!
+  ref: String!
+  file: String!
 }
 
 input NewLemarioType {
@@ -78,10 +115,4 @@ input NewEntryType {
   context: String!
   UF: String!
   source: String!
-}
-
-input NewSourcesType {
-  name: String!
-  ref: String!
-  file: String!
 }

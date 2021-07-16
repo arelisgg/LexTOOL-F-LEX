@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { LemarioModule } from './lemario/lemario.module';
 import { SourcesModule } from './sources/sources.module';
 import { GraphQLModule } from '@nestjs/graphql';
+import { DictionaryModule } from './dictionary/dictionary.module';
 
 @Module({
   imports: [
@@ -11,10 +12,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       useFindAndModify: false,
     }),
     GraphQLModule.forRoot({ autoSchemaFile: 'schema.gql' }),
-    LemarioModule,
-    SourcesModule,
-    EntryModule,
-
+      DictionaryModule,
   ],
 })
 export class AppModule {}

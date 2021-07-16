@@ -5,20 +5,52 @@ import {
   NewDictionaryType,
 } from './type/dictionary.types';
 import { DictionaryService } from './dictionary.service';
-import { NewSourcesType } from 'src/sources/type/sources.type';
+import { DictionarySourcesType, NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
 
 @Resolver()
 export class DictionaryResolver {
   constructor(private readonly DictionaryService: DictionaryService) {}
 
-  @Query(() => [DictionaryType])
-  async getAllDictionaries() {
-    return await this.DictionaryService.getAllDictionaries();
-  }
-
+    @Query(() => [DictionaryType])
+      async getAllDictionaries() {
+      return await this.DictionaryService.getAllDictionaries();
+    }
   
-  @Mutation(() => CreatedDictionaryType)
+    @Query(() => DictionaryType)
+     async getDictionaryByID(@Args('dictionaryID') dictionaryID: String) {
+     return this.DictionaryService.findByID(dictionaryID);
+    }
+
+    @Query(() => TypeSource)
+     async findAllSourcesByDictionaryID(@Args('dictionaryID') dictionaryID: String) {
+     return this.DictionaryService.getAllSourcesByID(dictionaryID);
+    }
+
+
+    @Mutation(() => CreatedDictionaryType)
      async createDictionary(@Args('createdDictionary') createdDictionary: NewDictionaryType) {
      return await this.DictionaryService.createDictionary(createdDictionary);
     }
+
+    @Mutation(() => DictionaryType)
+     async createSourceByDictionaryID( 
+        @Args('newSource') newSource: NewSourcesType, 
+        @Args('dictionaryID') dictionaryID: String
+      ){
+      return this.DictionaryService.createSourceByDictionaryID( 
+          newSource,
+          dictionaryID
+       );
+   }
+
+   @Mutation(() => DictionaryType)
+     async addSourcesToDictionary( 
+        @Args({ name: 'sourcesIDs', type:() => [String] }) sourcesIDs: [String], 
+        @Args('dictionaryID') dictionaryID: String
+      ){
+      return this.DictionaryService.addSourcesToDictionary( 
+          sourcesIDs,
+          dictionaryID
+       );
+   }
 }

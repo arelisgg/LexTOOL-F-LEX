@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Sources } from './model/sources.modelinterface';
-import { CreatedSourcesType, NewSourcesType } from './type/sources.type';
+import { CreatedSourcesType, NewSourcesType, TypeSource } from './type/sources.type';
 
 @Injectable()
 export class SourcesService {
@@ -23,6 +23,11 @@ export class SourcesService {
        await s.save();
        return s;
     }
+
+    async findByID(sourceID: String) : Promise <TypeSource>{
+        const entry = await this.sourcesModel.findById(sourceID);
+        return entry;
+     }
 
 }
 

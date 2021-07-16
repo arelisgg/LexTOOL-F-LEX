@@ -12,7 +12,7 @@ import { SourcesSchema } from './model/sources.model';
     MongooseModule.forFeature([{ name: 'Sources', schema: SourcesSchema }]),
   ],
   providers: [SourcesService, SourcesResolver],
- 
+  exports: [SourcesService, SourcesResolver],
 })
 export class SourcesModule { }
 

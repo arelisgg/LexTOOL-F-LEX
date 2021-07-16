@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreatedSourcesType,NewSourcesType, SourcesType } from './type/sources.type'
+import {CreatedSourcesType, NewSourcesType, TypeSource } from './type/sources.type'
 import { SourcesService } from "./sources.service";
 
 
@@ -8,14 +8,14 @@ export class SourcesResolver {
     constructor(private sourceService: SourcesService) {
     }
 
-    @Query(() => [SourcesType])
-     async findAllSources(){
-     return await this.sourceService.findAllSources();
-   }
-  
+    
     @Mutation(() => CreatedSourcesType)
-     async createSource(@Args('source') source: NewSourcesType) {
-    return await this.sourceService.createSource(source);
-    }
- 
+       async createSource(@Args('source') source: NewSourcesType) {
+       return await this.sourceService.createSource(source);
+      }
+
+      @Query(() => [TypeSource])
+      async findAllSources() {
+        return await this.sourceService.findAllSources();
+      }
 }

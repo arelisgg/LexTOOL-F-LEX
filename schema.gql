@@ -74,12 +74,21 @@ type CreatedDictionaryType {
 
 type Query {
   getAllDictionaries: [DictionaryType!]!
+  findAllSources: [TypeSource!]!
   findAllLemarios: [LemarioType!]!
   findAllEntries: [EntryType!]!
 }
 
+type TypeSource {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
 type Mutation {
   createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
+  createSource(source: NewSourcesType!): CreatedSourcesType!
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
   createEntryByLemarioID(lemarioID: String!, newEntry: NewEntryType!): EntryType!
   deleteLemarioByID(lemarioID: String!): LemarioType!
@@ -97,6 +106,13 @@ input NewDictionaryType {
 }
 
 input NewSourcesType {
+  name: String!
+  ref: String!
+  file: String!
+}
+
+type CreatedSourcesType {
+  id: ID!
   name: String!
   ref: String!
   file: String!

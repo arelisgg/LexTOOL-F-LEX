@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Sources } from './model/sources.modelinterface';
-import { CreatedSourcesType, SourcesType ,NewSourcesType } from './type/sources.type';
+import { CreatedSourcesType, NewSourcesType } from './type/sources.type';
 
 @Injectable()
 export class SourcesService {
@@ -17,30 +17,13 @@ export class SourcesService {
         return e;
     }
 
-    async createSource(createSources: CreatedSourcesType): Promise<CreatedSourcesType> {
-       const {file,name,ref,}=createSources;
-       const source= new this.sourcesModel({name,file,ref,});
-       await source.save();
-       return source;
+    async createSource(source: NewSourcesType): Promise<CreatedSourcesType> {
+       const {file,name,ref,}=source;
+       const s= new this.sourcesModel({name,file,ref,});
+       await s.save();
+       return s;
     }
 
-  //  async updateSource(
-   //     sourceID: string,
-   //     createSourcesDTO: CreateSourcesDTO,
-   // ): Promise<Sources> {
-   //     const updatedSource = await this.sourcesModel.findByIdAndUpdate(
-   //         sourceID,
-   //         createSourcesDTO,
-  //          { new: true },
-   //     );
-   //     return updatedSource;
-   // }
-
-
-    async deleteSource(sourceID: string): Promise<SourcesType> {
-        const deletedSource = await this.sourcesModel.findByIdAndDelete(sourceID);
-        return deletedSource;
-    }
 }
 
 

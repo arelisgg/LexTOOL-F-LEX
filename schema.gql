@@ -75,11 +75,12 @@ type CreatedDictionaryType {
 type Query {
   getAllDictionaries: [DictionaryType!]!
   getDictionaryByID(dictionaryID: String!): DictionaryType!
-  findAllSourcesByDictionaryID(dictionaryID: String!): TypeSource!
+  findAllSourcesByDictionaryID(dictionaryID: String!): [TypeSource!]!
   getSourceByID(sourceID: String!): TypeSource!
   findAllSources: [TypeSource!]!
   findAllLemarios: [LemarioType!]!
   getLemarioByID(lemarioID: String!): LemarioType!
+  findAllEntriesBylemarioID(lemarioID: String!): [EntryType!]!
   findAllEntries: [EntryType!]!
   getEntryByID(entryID: String!): EntryType!
 }
@@ -93,7 +94,7 @@ type TypeSource {
 
 type Mutation {
   createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
-  createSourceByDictionaryID(dictionaryID: String!, newSource: NewSourcesType!): DictionaryType!
+  createLemarioByDictionaryID(dictionaryID: String!, newLemarioe: NewLemarioType!): DictionaryType!
   addSourcesToDictionary(dictionaryID: String!, sourcesIDs: [String!]!): DictionaryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
@@ -118,13 +119,6 @@ input NewSourcesType {
   file: String!
 }
 
-type CreatedSourcesType {
-  id: ID!
-  name: String!
-  ref: String!
-  file: String!
-}
-
 input NewLemarioType {
   name: String!
   dictionaryType: String!
@@ -138,4 +132,11 @@ input NewEntryType {
   context: String!
   UF: String!
   source: String!
+}
+
+type CreatedSourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
 }

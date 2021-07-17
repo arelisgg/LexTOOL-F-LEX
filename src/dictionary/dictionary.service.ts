@@ -6,12 +6,15 @@ import { NewDictionaryType, DictionaryType, CreatedDictionaryType } from './type
 import { SourcesService } from 'src/sources/sources.service';
 import { NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
 import { NewLemarioType } from 'src/lemario/type/lemario.type';
+import { LemarioService } from 'src/lemario/lemario.service';
 
 @Injectable()
 export class DictionaryService {
+  
   constructor(
     @InjectModel('Dictionary') private DictionaryModel: Model<Dictionary>,
     private readonly SourcesService: SourcesService,
+    private readonly lemarioService: LemarioService,
   ) {}
 
     
@@ -59,16 +62,17 @@ export class DictionaryService {
         });
     }
 
-  async createSourceByDictionaryID(
-    newSource: NewSourcesType,
+  async createLemarioByDictionaryID(
+    newLemario: NewLemarioType,
     dictionaryID: String,
   ){
     const d = await this.DictionaryModel.findById(dictionaryID);
     if (!d) {
       throw new Error('Dictionary dont exist');
     } else {
-      const sModel = await this.SourcesService.createSource(newSource);
-      d.sources.push(sModel.id);
+      const sModel = await this.lemarioService.createLemario(newLemario);
+      d.lemario = sModel.id;
+      
       const updatedDictionary = await this.DictionaryModel.findOneAndUpdate(
         dictionaryID,
         d,

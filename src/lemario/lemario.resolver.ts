@@ -19,6 +19,11 @@ export class LemarioResolver {
      return this.lemarioService.findByID(lemarioID);
     }
 
+    @Query(() => [EntryType])
+     async findAllEntriesBylemarioID(@Args('lemarioID') lemarioID: String) {
+     return this.lemarioService.getAllEntriesByID(lemarioID);
+    }
+
     @Mutation(() => CreatedLemarioType)
      async createLemario(@Args('createdLemario') createdLemario: NewLemarioType) {
      return await this.lemarioService.createLemario(createdLemario);

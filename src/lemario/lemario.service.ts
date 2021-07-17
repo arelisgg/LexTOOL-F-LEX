@@ -59,7 +59,22 @@ export class LemarioService {
           });
         }
       }
-    
+
+      async getAllEntriesByID(lemarioID: String){
+        const l = await this.lemarioModel
+        .findById(lemarioID) .populate({
+          path: 'entries',
+          model: 'Entry',
+        }).exec();
+        const entriesIDs = l.entries;
+        console.log(entriesIDs);
+           if(entriesIDs.length > 0){
+          return entriesIDs; 
+        }else{
+          throw new Error(`Diccionario con id ${lemarioID} no tiene fuentes asociadas`);
+        }
+      }
+
     async findByID(lemarioID: String) {
         const lemario = await this.lemarioModel.findById(lemarioID).populate({
           path: 'entries',

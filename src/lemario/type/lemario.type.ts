@@ -5,11 +5,11 @@ import { EntryType,NewEntryType } from 'src/entry/type/entry.type';
 @ObjectType()
 export class LemarioType {
     @Field(() => ID)
-    id?: string;
+    id?: String;
     @Field()
-    name: string;
+    name: String;
     @Field()
-    dictionaryType: string;
+    dictionaryType: String;
     @Field(()=>[EntryType])
     entries: EntryType[];
 }
@@ -17,11 +17,11 @@ export class LemarioType {
 @ObjectType()
 export class CreatedLemarioType {
     @Field(() => ID)
-    id?: string;
+    id?: String;
     @Field()
-    name: string;
+    name: String;
     @Field()
-    dictionaryType: string;
+    dictionaryType: String;
     @Field(()=>[EntryType])
     entries: EntryType[];
 }
@@ -29,9 +29,9 @@ export class CreatedLemarioType {
 @InputType()
 export class NewLemarioType {
     @Field()
-    name: string;
+    name: String;
     @Field()
-    dictionaryType: string;
+    dictionaryType: String;
     @Field(()=>[NewEntryType],{ nullable: true })
     entries: NewEntryType[]; 
 }

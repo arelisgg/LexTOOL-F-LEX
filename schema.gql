@@ -2,20 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type DictionarySourcesType {
-  id: ID!
-  name: String!
-  ref: String!
-  file: String!
-}
-
-type EntrySourcesType {
-  id: ID!
-  name: String!
-  ref: String!
-  file: String!
-}
-
 type EntryType {
   id: ID!
   lemma: String!
@@ -24,6 +10,13 @@ type EntryType {
   context: String!
   UF: String!
   source: EntrySourcesType!
+}
+
+type EntrySourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
 }
 
 type CreatedEntryType {
@@ -61,6 +54,13 @@ type DictionaryType {
   lemario: LemarioType!
 }
 
+type DictionarySourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
 type CreatedDictionaryType {
   id: ID!
   name: String!
@@ -96,12 +96,18 @@ type Mutation {
   createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
   createLemarioByDictionaryID(dictionaryID: String!, newLemarioe: NewLemarioType!): DictionaryType!
   addSourcesToDictionary(dictionaryID: String!, sourcesIDs: [String!]!): DictionaryType!
+  deleteDictionaryByID(dictionaryID: String!): DictionaryType!
+  updateDictionaryByID(newDictionary: EditedDictionaryType!): DictionaryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
+  deleteSourceByID(SourceID: String!): TypeSource!
+  updateSourceByID(source: EditedSource!): TypeSource!
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
   createEntryByLemarioID(lemarioID: String!, newEntry: NewEntryType!): EntryType!
   deleteLemarioByID(lemarioID: String!): LemarioType!
+  updateLemarioByID(newLemario: EditedLemarioType!): LemarioType!
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
+  updateEntryByID(newEntry: EditedEntryType!): EntryType!
 }
 
 input NewDictionaryType {
@@ -134,9 +140,49 @@ input NewEntryType {
   source: String!
 }
 
+input EditedDictionaryType {
+  id: ID!
+  name: String!
+  reference: String!
+  description: String!
+  state: String!
+  letters: [String!]!
+  sources: [InputDictionarySourcesType!]
+}
+
+input InputDictionarySourcesType {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
 type CreatedSourcesType {
   id: ID!
   name: String!
   ref: String!
   file: String!
+}
+
+input EditedSource {
+  id: ID!
+  name: String!
+  ref: String!
+  file: String!
+}
+
+input EditedLemarioType {
+  id: ID!
+  name: String!
+  dictionaryType: String!
+}
+
+input EditedEntryType {
+  id: ID!
+  lemma: String!
+  letter: String!
+  ref: String!
+  context: String!
+  UF: String!
+  source: String!
 }

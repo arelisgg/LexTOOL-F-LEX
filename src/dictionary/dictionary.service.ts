@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Dictionary } from './model/dictionary.modelinterface';
-import { NewDictionaryType, DictionaryType, CreatedDictionaryType } from './type/dictionary.types';
+import { NewDictionaryType, DictionaryType, CreatedDictionaryType, EditedDictionaryType } from './type/dictionary.types';
 import { SourcesService } from 'src/sources/sources.service';
 import { NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
 import { NewLemarioType } from 'src/lemario/type/lemario.type';
@@ -152,5 +152,97 @@ export class DictionaryService {
       return d;
   }
 
+  async deleteDictionary(dictionaryID: String) {
+    const d = await this.DictionaryModel.findById(dictionaryID)
+    .populate({
+      path: 'sources',
+      model: 'Sources',
+      })
+      .populate({
+        path: 'lemario',
+        model: 'Lemario',
+        populate:{
+          path: 'entries',
+          model: 'Entry',
+          populate:{
+            path: 'source',
+            model: 'Sources',
+          },
+        },
+      }).exec();
+      if (!d) {
+        throw new Error('Dictionary dont exist');
+      }else{
+        const l = d.lemario;
+        this.lemarioService.deleteLemario(l);
+        const deletedDictionary = await d.deleteOne();
+        console.log(deletedDictionary);
+        return deletedDictionary;
+      }
+    }
 
+    async editDictionary (newDictionary: EditedDictionaryType) {
+      let oldDictionary = await this.DictionaryModel
+      .findById(newDictionary.id)
+      .exec();
+      const {  newSources, sourcesID, d  } = this.transformDictionary(
+        newDictionary,
+      );
+      if (oldDictionary) {
+       oldDictionary.name = newDictionary.name;
+       oldDictionary.state = newDictionary.state;
+       oldDictionary.reference = newDictionary.reference;
+       oldDictionary.description = newDictionary.description;
+       oldDictionary.letters = newDictionary.letters;
+
+       oldDictionary.sources.forEach(oS => {
+        let found = false;
+        let i = 0;
+        for (; i < newSources.length && !found; i++) {
+          const element = newSources[i];
+          console.log('element.id:', element.id);
+          console.log('oS:', oS);
+          if (element.id == oS) {
+            found = true;
+            console.log('a');
+          }
+        }
+        if (!found) {
+          this.SourcesService.deleteSource(oS);
+          oldDictionary.sources = oldDictionary.sources.filter(s => s != oS);
+        }
+      });
+      newSources.forEach( async nS => {
+        if (oldDictionary.sources.includes(nS.id)) {
+          this.SourcesService.editSource(nS);
+        } else {
+          const createdSource = this.SourcesService.createDictionarySource(nS);
+          oldDictionary.sources.push( (await createdSource).id);
+        }
+      });
+       oldDictionary.save();
+       console.log('oldDictionary:',oldDictionary);
+       return oldDictionary;
+
+      } else {
+      throw new Error('No existe la Dictionario');
+     }
+    }  
+
+    transformDictionary(dictionary: EditedDictionaryType) {
+      let sourcesID = [];
+      dictionary.sources.forEach(element => {
+        sourcesID.push(element.id);
+      });
+      const d = new this.DictionaryModel({
+        _id: dictionary.id,
+        name: dictionary.name,
+        state: dictionary.state,
+        letters: dictionary.letters,
+        description: dictionary.description,
+        reference: dictionary.reference,
+        sources: sourcesID,
+      });
+      return { newSources: dictionary.sources, sourcesID, d };
+    }
 }

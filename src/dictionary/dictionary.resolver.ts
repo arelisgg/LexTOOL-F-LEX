@@ -3,6 +3,7 @@ import {
   DictionaryType,
   CreatedDictionaryType,
   NewDictionaryType,
+  EditedDictionaryType,
 } from './type/dictionary.types';
 import { DictionaryService } from './dictionary.service';
 import { DictionarySourcesType, NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
@@ -54,4 +55,19 @@ export class DictionaryResolver {
           dictionaryID
        );
    }
+
+   @Mutation(() => DictionaryType)
+   async deleteDictionaryByID(
+     @Args('dictionaryID') dictionaryID: String) {
+     console.log('dictionaryID');
+     return this.DictionaryService.deleteDictionary(dictionaryID);
+   }
+
+   @Mutation(() => DictionaryType)
+   async updateDictionaryByID(
+     @Args('newDictionary' ) newDictionary: EditedDictionaryType) {
+   console.log(newDictionary);
+   return this.DictionaryService.editDictionary(newDictionary);
+  }
+
 }

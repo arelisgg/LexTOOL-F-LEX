@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreatedEntryType, EntryType, NewEntryType } from './type/entry.type'
+import { CreatedEntryType, EditedEntryType, EntryType, NewEntryType } from './type/entry.type'
 import { EntryService } from "./entry.service";
 
 @Resolver('entry')
@@ -28,4 +28,11 @@ export class EntryResolver {
     console.log(entryID);
     return this.entryService.deleteEntry(entryID);
   }
+
+  @Mutation(() => EntryType)
+      async updateEntryByID(
+        @Args('newEntry' ) newEntry: EditedEntryType) {
+      console.log(newEntry);
+      return this.entryService.editEntry(newEntry);
+    }
 }

@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Entry } from './model/entry.modelinterface';
-import { CreatedEntryType, NewEntryType, EntryType } from './type/entry.type';
+import { CreatedEntryType, NewEntryType, EntryType, EditedEntryType } from './type/entry.type';
 
 @Injectable()
 export class EntryService {
@@ -69,4 +69,25 @@ export class EntryService {
     return deletedEntry;
   }
 
+  async editEntry(newEntry: EditedEntryType) {
+    let oldEntry = await this.entryModel
+    .findById(newEntry.id)
+    .exec();
+
+  if (oldEntry) {
+    oldEntry.UF = newEntry.UF;
+    oldEntry.lemma = newEntry.lemma;
+    oldEntry.ref = newEntry.ref;
+    oldEntry.context= newEntry.context;
+    oldEntry.letter= newEntry.letter;
+    oldEntry.source= newEntry.source;
+   
+    oldEntry.save();
+    console.log('oldEntry:',oldEntry);
+
+    return oldEntry;
+  } else {
+    throw new Error('No existe la entrada');
+  }
+} 
 }

@@ -52,5 +52,23 @@ export class NewEntryType {
   UF: String;
   @Field(()=> String)
   source: String;
+}
+
+@InputType()
+export class EditedEntryType {
+  @Field(() => ID)
+  id?: String;
+  @Field()
+  lemma: String;
+  @Field()
+  letter: String;
+  @Field()
+  ref: String;
+  @Field()
+  context: String;
+  @Field()
+  UF: String;
+  @Field(()=> String)
+  source: String;
 
 }

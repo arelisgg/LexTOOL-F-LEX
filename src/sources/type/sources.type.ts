@@ -13,7 +13,7 @@ export class TypeSource {
     file: String;
 }
 
-@ObjectType()
+@ObjectType({isAbstract:true})
 export class DictionarySourcesType {
     @Field(() => ID)
     id?: String;
@@ -25,7 +25,7 @@ export class DictionarySourcesType {
     file: String;
 }
 
-@ObjectType()
+@ObjectType({isAbstract:true})
 export class  EntrySourcesType {
     @Field(() => ID)
     id?: String;
@@ -58,4 +58,29 @@ export class NewSourcesType {
     @Field()
     file: String;
 }
+
+@InputType({isAbstract:true})
+export class EditedSource {
+    @Field(() => ID)
+    id?: String;
+    @Field()
+    name: String;
+    @Field()
+    ref: String;
+    @Field()
+    file: String;
+}
+
+@InputType({isAbstract:true})
+export class InputDictionarySourcesType {
+    @Field(() => ID)
+    id?: String;
+    @Field()
+    name: String;
+    @Field()
+    ref: String;
+    @Field()
+    file: String;
+}
+
 

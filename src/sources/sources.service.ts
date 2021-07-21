@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Sources } from './model/sources.modelinterface';
-import { CreatedSourcesType, NewSourcesType, TypeSource } from './type/sources.type';
+import { CreatedSourcesType, DictionarySourcesType, EditedSource, InputDictionarySourcesType, NewSourcesType, TypeSource } from './type/sources.type';
 
 @Injectable()
 export class SourcesService {
@@ -17,18 +17,50 @@ export class SourcesService {
         return e;
     }
 
-    async createSource(source: NewSourcesType): Promise<CreatedSourcesType> {
+    async createSource(source: NewSourcesType): Promise<TypeSource> {
        const {file,name,ref,}=source;
        const s= new this.sourcesModel({name,file,ref,});
        await s.save();
        return s;
     }
 
+    async createDictionarySource(source:InputDictionarySourcesType): Promise<TypeSource> {
+      const {file,name,ref,}=source;
+      const s= new this.sourcesModel({name,file,ref,});
+      await s.save();
+      return s;
+   }
+
     async findByID(sourceID: String) : Promise <TypeSource>{
         const entry = await this.sourcesModel.findById(sourceID);
         return entry;
      }
 
+    async deleteSource(SourceID: String) {
+        const s = await this.sourcesModel.findById(SourceID);
+        if (!s) {
+          throw new Error(`Fuente con id: ${SourceID} no existe`);
+        }
+        const deletedSource = await s.deleteOne();
+        console.log(deletedSource);
+        return deletedSource; 
+      }
+
+    async editSource(newSource: EditedSource) {
+        let oldSource = await this.sourcesModel
+        .findById(newSource.id)
+        .exec();
+      if (oldSource) {
+        oldSource.file = newSource.file;
+        oldSource.ref = newSource.ref;
+        oldSource.name = newSource.name;
+       
+        oldSource.save();
+        console.log('oldSource:',oldSource);
+
+        return oldSource;
+      } else {
+        throw new Error('No existe la Fuente');
+      }
+    }
 }
-
-

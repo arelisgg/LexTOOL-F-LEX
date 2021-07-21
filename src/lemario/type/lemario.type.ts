@@ -35,3 +35,14 @@ export class NewLemarioType {
     @Field(()=>[NewEntryType],{ nullable: true })
     entries: NewEntryType[]; 
 }
+
+@InputType()
+export class EditedLemarioType {
+    @Field(() => ID)
+    id?: String;
+    @Field()
+    name: String;
+    @Field()
+    dictionaryType: String;
+     
+}

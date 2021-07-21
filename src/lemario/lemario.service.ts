@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Lemario } from './model/lemario.modelinterface';
-import { CreatedLemarioType, LemarioType, NewLemarioType } from './type/lemario.type';
+import { CreatedLemarioType, EditedLemarioType, LemarioType, NewLemarioType } from './type/lemario.type';
 
 import { NewEntryType } from 'src/entry/type/entry.type';
 import { EntryService } from 'src/entry/entry.service';
@@ -99,4 +99,21 @@ export class LemarioService {
           return deletedLemario;
     }
 
+    async editLemario (newLemario: EditedLemarioType) {
+      let oldLemario = await this.lemarioModel
+      .findById(newLemario.id)
+      .exec();
+  
+    if (oldLemario) {
+      oldLemario.name = newLemario.name;
+      oldLemario.dictionaryType = newLemario.dictionaryType;
+     
+      oldLemario.save();
+      console.log('oldLemarioy:',oldLemario);
+  
+      return oldLemario;
+    } else {
+      throw new Error('No existe la Lemario');
+    }
+  }  
 }

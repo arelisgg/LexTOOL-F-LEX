@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreatedLemarioType, LemarioType, NewLemarioType } from './type/lemario.type'
+import { CreatedLemarioType, EditedLemarioType, LemarioType, NewLemarioType } from './type/lemario.type'
 import { LemarioService } from "./lemario.service";
 import { EntryType, NewEntryType } from 'src/entry/type/entry.type';
 
@@ -45,4 +45,11 @@ export class LemarioResolver {
       console.log(lemarioID);
       return this.lemarioService.deleteLemario(lemarioID);
     }
+
+    @Mutation(() => LemarioType)
+    async updateLemarioByID(
+      @Args('newLemario' ) newLemario: EditedLemarioType) {
+    console.log(newLemario);
+    return this.lemarioService.editLemario(newLemario);
+  }
 }

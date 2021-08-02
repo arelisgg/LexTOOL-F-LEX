@@ -1,5 +1,4 @@
 import { InputType, ObjectType, Field, ID } from '@nestjs/graphql';
-import { LemarioType, NewLemarioType } from 'src/lemario/type/lemario.type';
 import { DictionarySourcesType, InputDictionarySourcesType, NewSourcesType } from 'src/sources/type/sources.type';
 
 @ObjectType()
@@ -14,12 +13,10 @@ export class DictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [String])
-  letters: [String];
   @Field(() => [DictionarySourcesType])
   sources: DictionarySourcesType[];
-  @Field(()=> LemarioType)
-  lemario: LemarioType;
+  @Field({ nullable: true })
+  lemario: String;
 }
 
 
@@ -36,11 +33,9 @@ export class CreatedDictionaryType {
   @Field()
   state: String;
   @Field(() => [String])
-  letters: [String];
-  @Field(() => [String])
   sources: String[];
-  @Field(()=> LemarioType)
-  lemario: LemarioType;
+  @Field({ nullable: true })
+  lemario: String;
 
 }
 
@@ -54,8 +49,6 @@ export class NewDictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [String])
-  letters: [String];
   @Field(() => [NewSourcesType], { nullable: true })
   sources: NewSourcesType[];
  
@@ -69,12 +62,10 @@ export class EditedDictionaryType {
   name: String;
   @Field()
   reference: String;
-  @Field()
+  @Field() 
   description: String;
   @Field()
   state: String;
-  @Field(() => [String])
-  letters: [String];
   @Field(() => [InputDictionarySourcesType], { nullable: true })
   sources: InputDictionarySourcesType[];
 

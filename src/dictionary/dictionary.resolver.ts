@@ -7,20 +7,25 @@ import {
 } from './type/dictionary.types';
 import { DictionaryService } from './dictionary.service';
 import { DictionarySourcesType, NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
-import { NewLemarioType } from 'src/lemario/type/lemario.type';
+import { LemarioType, NewLemarioType } from 'src/lemario/type/lemario.type';
 
 @Resolver()
 export class DictionaryResolver {
   constructor(private readonly DictionaryService: DictionaryService) {}
 
     @Query(() => [DictionaryType])
-      async getAllDictionaries() {
-      return await this.DictionaryService.getAllDictionaries();
+      async findAllDictionariesA() {
+      return await this.DictionaryService.getAllDictionariesA();
     }
   
     @Query(() => DictionaryType)
      async getDictionaryByID(@Args('dictionaryID') dictionaryID: String) {
      return this.DictionaryService.findByID(dictionaryID);
+    }
+
+    @Query(() => LemarioType)
+     async getLemarioByDictionaryID(@Args('dictionaryID') dictionaryID: String) {
+     return this.DictionaryService.getLemarioByDictionaryID(dictionaryID);
     }
 
     @Query(() => [TypeSource])
@@ -36,7 +41,7 @@ export class DictionaryResolver {
 
     @Mutation(() => DictionaryType)
      async createLemarioByDictionaryID( 
-        @Args('newLemarioe') newLemario: NewLemarioType, 
+        @Args('newLemario') newLemario: NewLemarioType, 
         @Args('dictionaryID') dictionaryID: String
       ){
       return this.DictionaryService.createLemarioByDictionaryID( 

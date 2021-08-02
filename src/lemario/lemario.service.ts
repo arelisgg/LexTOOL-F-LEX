@@ -23,6 +23,10 @@ export class LemarioService {
         .populate({
             path: 'entries',
             model: 'Entry',
+            populate: {
+              path: 'source',
+              model: 'Sources',
+            },
           })
           .exec();
         return e;
@@ -56,6 +60,10 @@ export class LemarioService {
           return updatedLemario.populate({
             path: 'entries',
             model: 'Entry',
+            populate: {
+              path: 'source',
+              model: 'Sources',
+            },
           });
         }
       }
@@ -65,6 +73,10 @@ export class LemarioService {
         .findById(lemarioID) .populate({
           path: 'entries',
           model: 'Entry',
+          populate: {
+            path: 'source',
+            model: 'Sources',
+          },
         }).exec();
         const entriesIDs = l.entries;
         console.log(entriesIDs);
@@ -79,6 +91,10 @@ export class LemarioService {
         const lemario = await this.lemarioModel.findById(lemarioID).populate({
           path: 'entries',
           model: 'Entry',
+          populate: {
+            path: 'source',
+            model: 'Sources',
+          },
         });
         return lemario;
     }
@@ -87,6 +103,10 @@ export class LemarioService {
         const l = await this.lemarioModel.findById(lemarioID).populate({
             path: 'entries',
             model: 'Entry',
+            populate: {
+              path: 'source',
+              model: 'Sources',
+            },
           });
           if (!l) {
             throw new Error('Lemario dont exist');

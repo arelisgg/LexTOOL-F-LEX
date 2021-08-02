@@ -10,10 +10,6 @@ export const DictionarySchema = new mongoose.Schema({
     required: true,
     default: null,
   },
-  letters: {
-     type: [String],
-     required: true 
-    },
   state: {
     type: String,
     required: true,
@@ -31,9 +27,8 @@ export const DictionarySchema = new mongoose.Schema({
     ref: 'Sources',
   },
   lemario: {
-    type: [mongoose.Schema.Types.ObjectId],
-    required: true,
+    type: String,
+    required: false,
     default: null,
-    ref: 'Lemario',
   },
 });

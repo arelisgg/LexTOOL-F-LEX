@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 //import { DtoValidationPipe } from './modules/shared/pipes/dto-validation.pipe';
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 10000;
 declare const module: any;
 
 async function bootstrap() {
@@ -16,7 +16,7 @@ async function bootstrap() {
   await app.listen(port);
   Logger.log(`Nest Server on http://localhost:${port}/graphql`, 'Bootstrap');
 
-  if (module.hot) {
+  if (module.hot) { 
     module.hot.accept();
     module.hot.dispose(() => app.close());
   }

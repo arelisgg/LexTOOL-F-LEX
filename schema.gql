@@ -16,6 +16,7 @@ type EntrySourcesType {
   id: ID!
   name: String!
   ref: String!
+  letters: [String!]!
   file: String!
 }
 
@@ -49,14 +50,14 @@ type DictionaryType {
   reference: String!
   description: String!
   state: String!
-  letters: [String!]!
   sources: [DictionarySourcesType!]!
-  lemario: LemarioType!
+  lemario: String
 }
 
 type DictionarySourcesType {
   id: ID!
   name: String!
+  letters: [String!]!
   ref: String!
   file: String!
 }
@@ -67,14 +68,14 @@ type CreatedDictionaryType {
   reference: String!
   description: String!
   state: String!
-  letters: [String!]!
   sources: [String!]!
-  lemario: LemarioType!
+  lemario: String
 }
 
 type Query {
-  getAllDictionaries: [DictionaryType!]!
+  findAllDictionariesA: [DictionaryType!]!
   getDictionaryByID(dictionaryID: String!): DictionaryType!
+  getLemarioByDictionaryID(dictionaryID: String!): LemarioType!
   findAllSourcesByDictionaryID(dictionaryID: String!): [TypeSource!]!
   getSourceByID(sourceID: String!): TypeSource!
   findAllSources: [TypeSource!]!
@@ -90,11 +91,12 @@ type TypeSource {
   name: String!
   ref: String!
   file: String!
+  letters: [String!]!
 }
 
 type Mutation {
   createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
-  createLemarioByDictionaryID(dictionaryID: String!, newLemarioe: NewLemarioType!): DictionaryType!
+  createLemarioByDictionaryID(dictionaryID: String!, newLemario: NewLemarioType!): DictionaryType!
   addSourcesToDictionary(dictionaryID: String!, sourcesIDs: [String!]!): DictionaryType!
   deleteDictionaryByID(dictionaryID: String!): DictionaryType!
   updateDictionaryByID(newDictionary: EditedDictionaryType!): DictionaryType!
@@ -115,7 +117,6 @@ input NewDictionaryType {
   reference: String!
   description: String!
   state: String!
-  letters: [String!]!
   sources: [NewSourcesType!]
 }
 
@@ -123,6 +124,7 @@ input NewSourcesType {
   name: String!
   ref: String!
   file: String!
+  letters: [String!]!
 }
 
 input NewLemarioType {
@@ -146,7 +148,6 @@ input EditedDictionaryType {
   reference: String!
   description: String!
   state: String!
-  letters: [String!]!
   sources: [InputDictionarySourcesType!]
 }
 
@@ -155,12 +156,14 @@ input InputDictionarySourcesType {
   name: String!
   ref: String!
   file: String!
+  letters: [String!]!
 }
 
 type CreatedSourcesType {
   id: ID!
   name: String!
   ref: String!
+  letters: [String!]!
   file: String!
 }
 
@@ -169,6 +172,7 @@ input EditedSource {
   name: String!
   ref: String!
   file: String!
+  letters: [String!]!
 }
 
 input EditedLemarioType {

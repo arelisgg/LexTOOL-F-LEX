@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { InputType, Field, ID, ObjectType } from '@nestjs/graphql';
 
-@ObjectType({isAbstract:true})
+@ObjectType({ isAbstract: true })
 export class TypeSource {
     @Field(() => ID)
     id?: String;
@@ -11,33 +11,39 @@ export class TypeSource {
     ref: String;
     @Field()
     file: String;
+    @Field(() => [String])
+    letters: [String];
 }
 
-@ObjectType({isAbstract:true})
+@ObjectType({ isAbstract: true })
 export class DictionarySourcesType {
     @Field(() => ID)
     id?: String;
     @Field()
     name: String;
+    @Field(() => [String])
+    letters: [String];
     @Field()
     ref: String;
     @Field()
     file: String;
 }
 
-@ObjectType({isAbstract:true})
-export class  EntrySourcesType {
+@ObjectType({ isAbstract: true })
+export class EntrySourcesType {
     @Field(() => ID)
     id?: String;
     @Field()
     name: String;
     @Field()
     ref: String;
+    @Field(() => [String])
+    letters: [String];
     @Field()
     file: String;
 }
 
-@ObjectType({isAbstract:true})
+@ObjectType({ isAbstract: true })
 export class CreatedSourcesType {
     @Field(() => ID)
     id?: String;
@@ -45,11 +51,13 @@ export class CreatedSourcesType {
     name: String;
     @Field()
     ref: String;
+    @Field(() => [String])
+    letters: [String];
     @Field()
     file: String;
 }
 
-@InputType({isAbstract:true})
+@InputType({ isAbstract: true })
 export class NewSourcesType {
     @Field()
     name: String;
@@ -57,9 +65,11 @@ export class NewSourcesType {
     ref: String;
     @Field()
     file: String;
+    @Field(() => [String])
+    letters: [String];
 }
 
-@InputType({isAbstract:true})
+@InputType({ isAbstract: true })
 export class EditedSource {
     @Field(() => ID)
     id?: String;
@@ -69,9 +79,11 @@ export class EditedSource {
     ref: String;
     @Field()
     file: String;
+    @Field(() => [String])
+    letters: [String];
 }
 
-@InputType({isAbstract:true})
+@InputType({ isAbstract: true })
 export class InputDictionarySourcesType {
     @Field(() => ID)
     id?: String;
@@ -81,6 +93,8 @@ export class InputDictionarySourcesType {
     ref: String;
     @Field()
     file: String;
+    @Field(() => [String])
+    letters: [String];
 }
 
 

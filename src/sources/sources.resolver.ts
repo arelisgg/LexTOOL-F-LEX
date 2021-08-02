@@ -9,7 +9,7 @@ export class SourcesResolver {
 
       @Query(() => TypeSource)
       async getSourceByID(@Args('sourceID') sourceID: String) {
-      return this.sourceService.findByID(sourceID);
+      return await this.sourceService.findByID(sourceID);
       }
     
       @Mutation(() => CreatedSourcesType)

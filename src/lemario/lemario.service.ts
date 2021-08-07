@@ -35,7 +35,6 @@ export class LemarioService {
     async createLemario(createdLemario: NewLemarioType) {
         const lemario = new this.lemarioModel({
             name: createdLemario.name,
-            dictionaryType:createdLemario.dictionaryType,
             entries: [],
         });
         await lemario.save();
@@ -126,7 +125,6 @@ export class LemarioService {
   
     if (oldLemario) {
       oldLemario.name = newLemario.name;
-      oldLemario.dictionaryType = newLemario.dictionaryType;
      
       oldLemario.save();
       console.log('oldLemarioy:',oldLemario);

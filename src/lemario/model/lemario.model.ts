@@ -4,11 +4,8 @@ import * as mongoose from 'mongoose';
 export const LemarioSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-    },
-    dictionaryType: {
-        type: String,
-        required: true,
+        required: false,
+        default: null,
     },
     entries:{
         type: [mongoose.Schema.Types.ObjectId],

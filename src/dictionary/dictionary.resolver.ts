@@ -6,7 +6,6 @@ import {
   EditedDictionaryType,
 } from './type/dictionary.types';
 import { DictionaryService } from './dictionary.service';
-import { DictionarySourcesType, NewSourcesType, TypeSource } from 'src/sources/type/sources.type';
 import { LemarioType, NewLemarioType } from 'src/lemario/type/lemario.type';
 
 @Resolver()
@@ -28,12 +27,6 @@ export class DictionaryResolver {
      return this.DictionaryService.getLemarioByDictionaryID(dictionaryID);
     }
 
-    @Query(() => [TypeSource])
-     async findAllSourcesByDictionaryID(@Args('dictionaryID') dictionaryID: String) {
-     return this.DictionaryService.getAllSourcesByID(dictionaryID);
-    }
-
-
     @Mutation(() => CreatedDictionaryType)
      async createDictionary(@Args('createdDictionary') createdDictionary: NewDictionaryType) {
      return await this.DictionaryService.createDictionary(createdDictionary);
@@ -51,12 +44,10 @@ export class DictionaryResolver {
    }
 
    @Mutation(() => DictionaryType)
-     async addSourcesToDictionary( 
-        @Args({ name: 'sourcesIDs', type:() => [String] }) sourcesIDs: [String], 
+     async addSourcesToDictionary(  
         @Args('dictionaryID') dictionaryID: String
       ){
       return this.DictionaryService.addSourcesToDictionary( 
-          sourcesIDs,
           dictionaryID
        );
    }
@@ -67,12 +58,5 @@ export class DictionaryResolver {
      console.log('dictionaryID');
      return this.DictionaryService.deleteDictionary(dictionaryID);
    }
-
-   @Mutation(() => DictionaryType)
-   async updateDictionaryByID(
-     @Args('newDictionary' ) newDictionary: EditedDictionaryType) {
-   console.log(newDictionary);
-   return this.DictionaryService.editDictionary(newDictionary);
-  }
 
 }

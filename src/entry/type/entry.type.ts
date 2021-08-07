@@ -8,10 +8,8 @@ export class EntryType {
   id?: String;
   @Field()
   lemma: String;
-  @Field()
+  @Field({ nullable: true })
   letter: String;
-  @Field()
-  ref: String;
   @Field()
   context: String;
   @Field()
@@ -26,10 +24,8 @@ export class CreatedEntryType {
   id?: String;
   @Field()
   lemma: String;
-  @Field()
+  @Field({ nullable: true })
   letter: String;
-  @Field()
-  ref: String;
   @Field()
   context: String;
   @Field()
@@ -42,10 +38,8 @@ export class CreatedEntryType {
 export class NewEntryType {
   @Field()
   lemma: String;
-  @Field()
+  @Field({ nullable: true })
   letter: String;
-  @Field()
-  ref: String;
   @Field()
   context: String;
   @Field()
@@ -60,10 +54,8 @@ export class EditedEntryType {
   id?: String;
   @Field()
   lemma: String;
-  @Field()
+  @Field({ nullable: true })
   letter: String;
-  @Field()
-  ref: String;
   @Field()
   context: String;
   @Field()

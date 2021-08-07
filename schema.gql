@@ -5,8 +5,7 @@
 type EntryType {
   id: ID!
   lemma: String!
-  letter: String!
-  ref: String!
+  letter: String
   context: String!
   UF: String!
   source: EntrySourcesType!
@@ -16,15 +15,15 @@ type EntrySourcesType {
   id: ID!
   name: String!
   ref: String!
-  letters: [String!]!
   file: String!
+  type: String!
+  subType: String!
 }
 
 type CreatedEntryType {
   id: ID!
   lemma: String!
-  letter: String!
-  ref: String!
+  letter: String
   context: String!
   UF: String!
   source: EntrySourcesType!
@@ -32,58 +31,24 @@ type CreatedEntryType {
 
 type LemarioType {
   id: ID!
-  name: String!
-  dictionaryType: String!
+  name: String
   entries: [EntryType!]!
 }
 
 type CreatedLemarioType {
   id: ID!
-  name: String!
-  dictionaryType: String!
+  name: String
   entries: [EntryType!]!
 }
 
-type DictionaryType {
-  id: ID!
-  name: String!
-  reference: String!
-  description: String!
-  state: String!
-  sources: [DictionarySourcesType!]!
-  lemario: String
-}
-
-type DictionarySourcesType {
-  id: ID!
-  name: String!
-  letters: [String!]!
-  ref: String!
-  file: String!
-}
-
-type CreatedDictionaryType {
-  id: ID!
-  name: String!
-  reference: String!
-  description: String!
-  state: String!
-  sources: [String!]!
-  lemario: String
-}
-
 type Query {
-  findAllDictionariesA: [DictionaryType!]!
-  getDictionaryByID(dictionaryID: String!): DictionaryType!
-  getLemarioByDictionaryID(dictionaryID: String!): LemarioType!
-  findAllSourcesByDictionaryID(dictionaryID: String!): [TypeSource!]!
-  getSourceByID(sourceID: String!): TypeSource!
-  findAllSources: [TypeSource!]!
   findAllLemarios: [LemarioType!]!
   getLemarioByID(lemarioID: String!): LemarioType!
   findAllEntriesBylemarioID(lemarioID: String!): [EntryType!]!
   findAllEntries: [EntryType!]!
   getEntryByID(entryID: String!): EntryType!
+  getSourceByID(sourceID: String!): TypeSource!
+  findAllSources: [TypeSource!]!
 }
 
 type TypeSource {
@@ -91,18 +56,11 @@ type TypeSource {
   name: String!
   ref: String!
   file: String!
-  letters: [String!]!
+  type: String!
+  subType: String!
 }
 
 type Mutation {
-  createDictionary(createdDictionary: NewDictionaryType!): CreatedDictionaryType!
-  createLemarioByDictionaryID(dictionaryID: String!, newLemario: NewLemarioType!): DictionaryType!
-  addSourcesToDictionary(dictionaryID: String!, sourcesIDs: [String!]!): DictionaryType!
-  deleteDictionaryByID(dictionaryID: String!): DictionaryType!
-  updateDictionaryByID(newDictionary: EditedDictionaryType!): DictionaryType!
-  createSource(source: NewSourcesType!): CreatedSourcesType!
-  deleteSourceByID(SourceID: String!): TypeSource!
-  updateSourceByID(source: EditedSource!): TypeSource!
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
   createEntryByLemarioID(lemarioID: String!, newEntry: NewEntryType!): EntryType!
   deleteLemarioByID(lemarioID: String!): LemarioType!
@@ -110,61 +68,53 @@ type Mutation {
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
   updateEntryByID(newEntry: EditedEntryType!): EntryType!
-}
-
-input NewDictionaryType {
-  name: String!
-  reference: String!
-  description: String!
-  state: String!
-  sources: [NewSourcesType!]
-}
-
-input NewSourcesType {
-  name: String!
-  ref: String!
-  file: String!
-  letters: [String!]!
+  createSource(source: NewSourcesType!): CreatedSourcesType!
+  deleteSourceByID(SourceID: String!): TypeSource!
+  updateSourceByID(source: EditedSource!): TypeSource!
 }
 
 input NewLemarioType {
-  name: String!
-  dictionaryType: String!
+  name: String
   entries: [NewEntryType!]
 }
 
 input NewEntryType {
   lemma: String!
-  letter: String!
-  ref: String!
+  letter: String
   context: String!
   UF: String!
   source: String!
 }
 
-input EditedDictionaryType {
+input EditedLemarioType {
   id: ID!
-  name: String!
-  reference: String!
-  description: String!
-  state: String!
-  sources: [InputDictionarySourcesType!]
+  name: String
 }
 
-input InputDictionarySourcesType {
+input EditedEntryType {
   id: ID!
-  name: String!
-  ref: String!
-  file: String!
-  letters: [String!]!
+  lemma: String!
+  letter: String
+  context: String!
+  UF: String!
+  source: String!
 }
 
 type CreatedSourcesType {
   id: ID!
   name: String!
   ref: String!
-  letters: [String!]!
   file: String!
+  type: String!
+  subType: String!
+}
+
+input NewSourcesType {
+  name: String!
+  ref: String!
+  file: String!
+  type: String!
+  subType: String!
 }
 
 input EditedSource {
@@ -172,21 +122,6 @@ input EditedSource {
   name: String!
   ref: String!
   file: String!
-  letters: [String!]!
-}
-
-input EditedLemarioType {
-  id: ID!
-  name: String!
-  dictionaryType: String!
-}
-
-input EditedEntryType {
-  id: ID!
-  lemma: String!
-  letter: String!
-  ref: String!
-  context: String!
-  UF: String!
-  source: String!
+  type: String!
+  subType: String!
 }

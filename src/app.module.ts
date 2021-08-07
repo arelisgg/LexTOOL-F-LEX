@@ -12,7 +12,7 @@ import { DictionaryModule } from './dictionary/dictionary.module';
       useFindAndModify: false,
     }),
     GraphQLModule.forRoot({ autoSchemaFile: 'schema.gql' }),
-      DictionaryModule,
+    LemarioModule,
   ],
 })
 export class AppModule {}

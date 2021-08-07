@@ -4,7 +4,8 @@ export const EntrySchema = new mongoose.Schema({
 
   letter: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   context: {
     type: String,
@@ -18,10 +19,6 @@ export const EntrySchema = new mongoose.Schema({
   UF: {
     type: String,
     default: null,
-  },
-  ref: {
-    type: String,
-    required: false,
   },
   source:{
     type: [mongoose.Schema.Types.ObjectId],

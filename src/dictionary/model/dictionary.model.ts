@@ -20,12 +20,6 @@ export const DictionarySchema = new mongoose.Schema({
     required: true,
     default: null,
   },
-  sources: {
-    type: [mongoose.Schema.Types.ObjectId],
-    required: true,
-    default: null,
-    ref: 'Sources',
-  },
   lemario: {
     type: String,
     required: false,

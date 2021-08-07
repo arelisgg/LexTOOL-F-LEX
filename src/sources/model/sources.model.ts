@@ -14,8 +14,12 @@ export const SourcesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    letters: {
-        type: [String],
-        required: true
+    type:{
+        type: String,
+        required: true,
+    },
+    subType:{
+        type: String,
+        required: false,
     },
 });

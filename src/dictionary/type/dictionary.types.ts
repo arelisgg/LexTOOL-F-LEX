@@ -1,5 +1,4 @@
 import { InputType, ObjectType, Field, ID } from '@nestjs/graphql';
-import { DictionarySourcesType, InputDictionarySourcesType, NewSourcesType } from 'src/sources/type/sources.type';
 
 @ObjectType()
 export class DictionaryType {
@@ -13,8 +12,6 @@ export class DictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [DictionarySourcesType])
-  sources: DictionarySourcesType[];
   @Field({ nullable: true })
   lemario: String;
 }
@@ -32,8 +29,6 @@ export class CreatedDictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [String])
-  sources: String[];
   @Field({ nullable: true })
   lemario: String;
 
@@ -49,8 +44,6 @@ export class NewDictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [NewSourcesType], { nullable: true })
-  sources: NewSourcesType[];
  
 }
 
@@ -66,8 +59,6 @@ export class EditedDictionaryType {
   description: String;
   @Field()
   state: String;
-  @Field(() => [InputDictionarySourcesType], { nullable: true })
-  sources: InputDictionarySourcesType[];
-
+  
 }
 

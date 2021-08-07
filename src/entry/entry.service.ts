@@ -24,7 +24,6 @@ export class EntryService {
   async createEntry(createdEntry: NewEntryType) {
     const {
       lemma,
-      ref,
       letter,
       UF,
       context,
@@ -33,7 +32,6 @@ export class EntryService {
     
     const e = new this.entryModel({
       lemma,
-      ref,
       letter,
       UF,
       context,
@@ -77,7 +75,6 @@ export class EntryService {
   if (oldEntry) {
     oldEntry.UF = newEntry.UF;
     oldEntry.lemma = newEntry.lemma;
-    oldEntry.ref = newEntry.ref;
     oldEntry.context= newEntry.context;
     oldEntry.letter= newEntry.letter;
     oldEntry.source= newEntry.source;

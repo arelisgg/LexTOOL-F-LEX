@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Sources } from './model/sources.modelinterface';
-import { CreatedSourcesType, DictionarySourcesType, EditedSource, InputDictionarySourcesType, NewSourcesType, TypeSource } from './type/sources.type';
+import { CreatedSourcesType, EditedSource, NewSourcesType, TypeSource } from './type/sources.type';
 
 @Injectable()
 export class SourcesService {
@@ -18,15 +18,15 @@ export class SourcesService {
   }
 
   async createSource(source: NewSourcesType): Promise<TypeSource> {
-    const { file, name, ref, letters} = source;
-    const s = new this.sourcesModel({ name, file, ref, letters });
+    const { file, name, ref, type, subType} = source;
+    const s = new this.sourcesModel({ name, file, ref, type, subType });
     await s.save();
     return s;
   }
 
-  async createDictionarySource(source: InputDictionarySourcesType): Promise<TypeSource> {
-    const { file, name, ref, letters} = source;
-    const s = new this.sourcesModel({ name, file, ref, letters});
+  async createDictionarySource(source: NewSourcesType): Promise<TypeSource> {
+    const { file, name, ref, type, subType} = source;
+    const s = new this.sourcesModel({ name, file, ref, type, subType});
     await s.save();
     return s;
   }
@@ -54,7 +54,8 @@ export class SourcesService {
       oldSource.file = newSource.file;
       oldSource.ref = newSource.ref;
       oldSource.name = newSource.name;
-      oldSource.letters = newSource.letters;
+      oldSource.type = newSource.type;
+      oldSource.subType = newSource.subType;
 
       oldSource.save();
       console.log('oldSource:', oldSource);

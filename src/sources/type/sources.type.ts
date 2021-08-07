@@ -11,22 +11,10 @@ export class TypeSource {
     ref: String;
     @Field()
     file: String;
-    @Field(() => [String])
-    letters: [String];
-}
-
-@ObjectType({ isAbstract: true })
-export class DictionarySourcesType {
-    @Field(() => ID)
-    id?: String;
     @Field()
-    name: String;
-    @Field(() => [String])
-    letters: [String];
+    type: String;
     @Field()
-    ref: String;
-    @Field()
-    file: String;
+    subType: String;
 }
 
 @ObjectType({ isAbstract: true })
@@ -37,10 +25,12 @@ export class EntrySourcesType {
     name: String;
     @Field()
     ref: String;
-    @Field(() => [String])
-    letters: [String];
     @Field()
     file: String;
+    @Field()
+    type: String;
+    @Field()
+    subType: String;
 }
 
 @ObjectType({ isAbstract: true })
@@ -51,10 +41,12 @@ export class CreatedSourcesType {
     name: String;
     @Field()
     ref: String;
-    @Field(() => [String])
-    letters: [String];
     @Field()
     file: String;
+    @Field()
+    type: String;
+    @Field()
+    subType: String;
 }
 
 @InputType({ isAbstract: true })
@@ -65,8 +57,10 @@ export class NewSourcesType {
     ref: String;
     @Field()
     file: String;
-    @Field(() => [String])
-    letters: [String];
+    @Field()
+    type: String;
+    @Field()
+    subType: String;
 }
 
 @InputType({ isAbstract: true })
@@ -79,22 +73,8 @@ export class EditedSource {
     ref: String;
     @Field()
     file: String;
-    @Field(() => [String])
-    letters: [String];
+    @Field()
+    type: String;
+    @Field()
+    subType: String;
 }
-
-@InputType({ isAbstract: true })
-export class InputDictionarySourcesType {
-    @Field(() => ID)
-    id?: String;
-    @Field()
-    name: String;
-    @Field()
-    ref: String;
-    @Field()
-    file: String;
-    @Field(() => [String])
-    letters: [String];
-}
-
-

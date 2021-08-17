@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 //import { DtoValidationPipe } from './modules/shared/pipes/dto-validation.pipe';
 
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 12000;
 declare const module: any;
 
 async function bootstrap() {

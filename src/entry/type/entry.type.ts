@@ -1,5 +1,4 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { EntrySourcesType } from 'src/sources/type/sources.type';
 
 
 @ObjectType()
@@ -14,8 +13,8 @@ export class EntryType {
   context: String;
   @Field()
   UF: String;
-  @Field(()=> EntrySourcesType)
-  source: EntrySourcesType;
+  @Field()
+  source: String;
  }
 
 @ObjectType()
@@ -30,8 +29,8 @@ export class CreatedEntryType {
   context: String;
   @Field()
   UF: String;
-  @Field(()=> EntrySourcesType)
-  source: EntrySourcesType;
+  @Field()
+  source: String;
 }
 
 @InputType()
@@ -44,7 +43,7 @@ export class NewEntryType {
   context: String;
   @Field()
   UF: String;
-  @Field(()=> String)
+  @Field()
   source: String;
 }
 
@@ -60,7 +59,7 @@ export class EditedEntryType {
   context: String;
   @Field()
   UF: String;
-  @Field(()=> String)
+  @Field()
   source: String;
 
 }

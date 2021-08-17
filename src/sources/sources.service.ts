@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -18,22 +17,138 @@ export class SourcesService {
   }
 
   async createSource(source: NewSourcesType): Promise<TypeSource> {
-    const { file, name, ref, type, subType} = source;
-    const s = new this.sourcesModel({ name, file, ref, type, subType });
+    const {
+      file,
+      name,
+      ref,
+      type,
+      subType,
+      support,
+      bloque,
+      year,
+      author,
+      title,
+      country,
+      theme,
+      publication,
+
+      //linguisticas internet
+      URL,
+
+      //linguisticas audio o video
+      date,
+      cantMin,
+      broadcastMedium,
+      typology,
+      speaker,
+
+      //metalinguisticas
+      dictionaryType,
+      century,
+    } = source;
+    const s = new this.sourcesModel({
+      file,
+      name,
+      ref,
+      type,
+      subType,
+      support,
+      bloque,
+      year,
+      author,
+      title,
+      country,
+      theme,
+      publication,
+
+      //linguisticas internet
+      URL,
+
+      //linguisticas audio o video
+      date,
+      cantMin,
+      broadcastMedium,
+      typology,
+      speaker,
+
+      //metalinguisticas
+      dictionaryType,
+      century,
+    });
     await s.save();
     return s;
   }
 
   async createDictionarySource(source: NewSourcesType): Promise<TypeSource> {
-    const { file, name, ref, type, subType} = source;
-    const s = new this.sourcesModel({ name, file, ref, type, subType});
+    const {
+      file,
+      name,
+      ref,
+      type,
+      subType,
+
+      //linguisticas libro o prensa
+      support,
+      bloque,
+      year,
+      author,
+      title,
+      country,
+      theme,
+      publication,
+
+      //linguisticas internet
+      URL,
+
+      //linguisticas audio o video
+      date,
+      cantMin,
+      broadcastMedium,
+      typology,
+      speaker,
+
+      //metalinguisticas
+      dictionaryType,
+      century
+    } = source;
+    const s = new this.sourcesModel({
+      file,
+      name,
+      ref,
+      type,
+      subType,
+
+      //linguisticas libro o prensa
+      support,
+      bloque,
+      year,
+      author,
+      title,
+      country,
+      theme,
+      publication,
+
+      //linguisticas internet
+      URL,
+
+      //linguisticas audio o video
+      date,
+      cantMin,
+      broadcastMedium,
+      typology,
+      speaker,
+
+      //metalinguisticas
+      dictionaryType,
+      century
+    });
     await s.save();
     return s;
   }
 
   async findByID(sourceID: String): Promise<TypeSource> {
-    const entry = await this.sourcesModel.findById(sourceID);
-    return entry;
+    const source = await this.sourcesModel.findById(sourceID);
+    return source;
   }
 
   async deleteSource(SourceID: String) {
@@ -57,6 +172,30 @@ export class SourcesService {
       oldSource.type = newSource.type;
       oldSource.subType = newSource.subType;
 
+      //linguisticas libro o prensa
+      oldSource.support = newSource.support;
+      oldSource.bloque = newSource.bloque;
+      oldSource.year = newSource.year;
+      oldSource.author = newSource.author;
+      oldSource.title = newSource.title;
+      oldSource.country = newSource.country;
+      oldSource.theme = newSource.theme;
+      oldSource.publication = newSource.publication;
+      
+      //linguisticas internet
+      oldSource.URL = newSource.URL;
+      
+      //linguisticas audio o video
+      oldSource.date = newSource.date;
+      oldSource.cantMin = newSource.cantMin;
+      oldSource.broadcastMedium = newSource.broadcastMedium;
+      oldSource.typology = newSource.typology;
+      oldSource.speaker = newSource.speaker;
+
+      //metalinguisticas
+      oldSource.dictionaryType = newSource.dictionaryType;
+      oldSource.century = newSource.century;
+      
       oldSource.save();
       console.log('oldSource:', oldSource);
 

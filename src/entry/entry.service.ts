@@ -5,22 +5,35 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Entry } from './model/entry.modelinterface';
 import { CreatedEntryType, NewEntryType, EntryType, EditedEntryType } from './type/entry.type';
-
+import { SourcesService } from 'src/sources/sources.service';
 @Injectable()
 export class EntryService {
   constructor(
     @InjectModel('Entry') private readonly entryModel: Model<Entry>,
+    private readonly sourceService: SourcesService,
   ) { }
 
+
   async getAllEntries() {
-    const e = await this.entryModel.find()
-    .populate({
-        path: 'source',
-        model: 'Sources',
-      }).exec();
+    const e = await this.entryModel.find();
     return e;
   }
-  
+
+  async getAllEntriesBySourceID(sourceID: String): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+    
+    let entriesOfTheSource: EntryType[] = [];
+    if(entries.length > 0){
+      for(let i = 0; i < entries.length; i++ ){
+        const e = entries[i];
+        if (e.source === sourceID) {
+          entriesOfTheSource.push(e);
+        }
+      }
+    }
+    return entriesOfTheSource;
+  }
+
   async createEntry(createdEntry: NewEntryType) {
     const {
       lemma,
@@ -28,8 +41,8 @@ export class EntryService {
       UF,
       context,
       source,
-    }=createdEntry;
-    
+    } = createdEntry;
+
     const e = new this.entryModel({
       lemma,
       letter,
@@ -38,27 +51,16 @@ export class EntryService {
       source,
     });
     await e.save();
-    return e.populate({
-      path: 'source',
-      model: 'Sources',
-    });
+    return e;
   }
-    
-  async findByID(entryID: String){
-    const entry = await this.entryModel.findById(entryID)
-     .populate({
-      path: 'source',
-      model: 'Sources',
-    })
-    .exec();
+
+  async findByID(entryID: String) {
+    const entry = await this.entryModel.findById(entryID);
     return entry;
   }
-  
+
   async deleteEntry(entryID: String) {
-    const e = await (await this.entryModel.findById(entryID)).populate({
-      path: 'source',
-      model: 'Sources',
-    });
+    const e = await (await this.entryModel.findById(entryID));
     if (!e) {
       throw new Error(`Entrada con id: ${entryID} no existe`);
     }
@@ -69,22 +71,22 @@ export class EntryService {
 
   async editEntry(newEntry: EditedEntryType) {
     let oldEntry = await this.entryModel
-    .findById(newEntry.id)
-    .exec();
+      .findById(newEntry.id)
+      .exec();
 
-  if (oldEntry) {
-    oldEntry.UF = newEntry.UF;
-    oldEntry.lemma = newEntry.lemma;
-    oldEntry.context= newEntry.context;
-    oldEntry.letter= newEntry.letter;
-    oldEntry.source= newEntry.source;
-   
-    oldEntry.save();
-    console.log('oldEntry:',oldEntry);
+    if (oldEntry) {
+      oldEntry.UF = newEntry.UF;
+      oldEntry.lemma = newEntry.lemma;
+      oldEntry.context = newEntry.context;
+      oldEntry.letter = newEntry.letter;
+      oldEntry.source = newEntry.source;
 
-    return oldEntry;
-  } else {
-    throw new Error('No existe la entrada');
+      oldEntry.save();
+      console.log('oldEntry:', oldEntry);
+
+      return oldEntry;
+    } else {
+      throw new Error('No existe la entrada');
+    }
   }
-} 
 }

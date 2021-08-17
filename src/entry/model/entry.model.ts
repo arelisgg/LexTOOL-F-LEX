@@ -9,7 +9,8 @@ export const EntrySchema = new mongoose.Schema({
   },
   context: {
     type: String,
-    required: true,
+    required: false,
+    default: null,
   },
   lemma: {
     type: String,
@@ -18,12 +19,10 @@ export const EntrySchema = new mongoose.Schema({
   },
   UF: {
     type: String,
-    default: null,
+    required: true,
   },
   source:{
-    type: [mongoose.Schema.Types.ObjectId],
+    type: String,
     required: true,
-    default: null,
-    ref: 'Sources',
   },
 });

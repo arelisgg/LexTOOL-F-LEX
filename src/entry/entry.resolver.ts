@@ -18,6 +18,11 @@ export class EntryResolver {
    return this.entryService.findByID(entryID);
  }
 
+ @Query(() => [EntryType])
+ async getAllEntriesBySourceID(@Args('sourceID') sourceID: String) {
+   return this.entryService.getAllEntriesBySourceID(sourceID);
+ }
+
  @Mutation(() => CreatedEntryType)
   async createEntry(@Args('createdEntry') createdEntry: NewEntryType) {
   return await this.entryService.createEntry(createdEntry);

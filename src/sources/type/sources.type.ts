@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { InputType, Field, ID, ObjectType } from '@nestjs/graphql';
 
+import { AuthorType, NewAuthorType } from './author.type';
+
 @ObjectType({ isAbstract: true })
 export class TypeSource {
     @Field(() => ID)
@@ -15,22 +17,46 @@ export class TypeSource {
     type: String;
     @Field()
     subType: String;
-}
 
-@ObjectType({ isAbstract: true })
-export class EntrySourcesType {
-    @Field(() => ID)
-    id?: String;
+    //linguisticas prensa o libro
     @Field()
-    name: String;
+    support: String;
     @Field()
-    ref: String;
+    bloque: String;
     @Field()
-    file: String;
+    year: Number;
+    @Field(() => [AuthorType])
+    author: [AuthorType];
     @Field()
-    type: String;
+    title: String;
     @Field()
-    subType: String;
+    country: String;
+    @Field()
+    theme: String;
+    @Field()
+    publication: String;
+
+    //linguisticas internet
+    @Field()
+    URL: String;
+
+    //linguisticas audio o video
+    @Field()
+    date: Date;
+    @Field()
+    cantMin: Number;
+    @Field()
+    broadcastMedium: String;
+    @Field()
+    typology: String;
+    @Field()
+    speaker: String;
+
+    //metalinguisticas
+    @Field()
+    dictionaryType: String;
+    @Field()
+    century: String;
 }
 
 @ObjectType({ isAbstract: true })
@@ -47,6 +73,46 @@ export class CreatedSourcesType {
     type: String;
     @Field()
     subType: String;
+    
+    //linguisticas prensa o libro
+    @Field()
+    support: String;
+    @Field()
+    bloque: String;
+    @Field()
+    year: Number;
+    @Field(() => [AuthorType])
+    author: [AuthorType];
+    @Field()
+    title: String;
+    @Field()
+    country: String;
+    @Field()
+    theme: String;
+    @Field()
+    publication: String;
+
+    //linguisticas internet
+    @Field()
+    URL: String;
+
+    //linguisticas audio o video
+    @Field()
+    date: Date;
+    @Field()
+    cantMin: Number;
+    @Field()
+    broadcastMedium: String;
+    @Field()
+    typology: String;
+    @Field()
+    speaker: String;
+
+    //metalinguisticas
+    @Field()
+    dictionaryType: String;
+    @Field()
+    century: String;
 }
 
 @InputType({ isAbstract: true })
@@ -61,6 +127,46 @@ export class NewSourcesType {
     type: String;
     @Field()
     subType: String;
+    
+    //linguisticas prensa o libro
+    @Field()
+    support: String;
+    @Field()
+    bloque: String;
+    @Field()
+    year: Number;
+    @Field(() => [NewAuthorType])
+    author: [NewAuthorType];
+    @Field()
+    title: String;
+    @Field()
+    country: String;
+    @Field()
+    theme: String;
+    @Field()
+    publication: String;
+
+    //linguisticas internet
+    @Field()
+    URL: String;
+
+    //linguisticas audio o video
+    @Field()
+    date: Date;
+    @Field()
+    cantMin: Number;
+    @Field()
+    broadcastMedium: String;
+    @Field()
+    typology: String;
+    @Field()
+    speaker: String;
+
+    //metalinguisticas
+    @Field()
+    dictionaryType: String;
+    @Field()
+    century: String;
 }
 
 @InputType({ isAbstract: true })
@@ -77,4 +183,44 @@ export class EditedSource {
     type: String;
     @Field()
     subType: String;
+    
+    //linguisticas prensa o libro
+    @Field()
+    support: String;
+    @Field()
+    bloque: String;
+    @Field()
+    year: Number;
+    @Field(() => [NewAuthorType])
+    author: [NewAuthorType];
+    @Field()
+    title: String;
+    @Field()
+    country: String;
+    @Field()
+    theme: String;
+    @Field()
+    publication: String;
+
+    //linguisticas internet
+    @Field()
+    URL: String;
+
+    //linguisticas audio o video
+    @Field()
+    date: Date;
+    @Field()
+    cantMin: Number;
+    @Field()
+    broadcastMedium: String;
+    @Field()
+    typology: String;
+    @Field()
+    speaker: String;
+
+    //metalinguisticas
+    @Field()
+    dictionaryType: String;
+    @Field()
+    century: String;
 }

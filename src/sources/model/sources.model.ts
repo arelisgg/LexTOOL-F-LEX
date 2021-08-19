@@ -25,72 +25,63 @@ export const SourcesSchema = new mongoose.Schema({
     support: {
         type: String,
         required: false,
+        default: null,
     },
     bloque: {
         type: String,
         required: false,
-    },
-    year: {
-        type: Number,
-        required: false,
-    },
-    author: {
-        type: [{ name: String, siglas: String }],
-        required: false,
         default: null,
     },
-    title: {
-        type: String,
-        required: false,
-    },
-    country: {
-        type: String,
-        required: false,
-    },
+    //linguisticas libro o prensa
     theme: {
         type: String,
         required: false,
+        default: null,
     },
     publication: {
         type: String,
         required: false,
+        default: null,
     },
 
     //linguisticas internet
     URL: {
         type: String,
         required: false,
+        default: null,
     },
 
     //linguisticas audio o video
-    date: {
-        type: String,
-        required: false,
-    },
     cantMin: {
         type: String,
         required: false,
+        default: null,
     },
     broadcastMedium: {
         type: String,
         required: false,
+        default: null,
     },
     typology: {
         type: String,
         required: false,
+        default: null,
     },
     speaker: {
         type: String,
         required: false,
+        default: null,
     },
 
     //metalinguisticas
     dictionaryType: {
         type: String,
         required: false,
+        default: null,
     },
     century: {
         type: String,
         required: false,
+        default: null,
     },
 });

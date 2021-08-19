@@ -32,10 +32,6 @@ type CreatedLemarioType {
   entries: [EntryType!]!
 }
 
-type AuthorType {
-  name: String!
-}
-
 type Query {
   findAllLemarios: [LemarioType!]!
   getLemarioByID(lemarioID: String!): LemarioType!
@@ -54,28 +50,18 @@ type TypeSource {
   file: String!
   type: String!
   subType: String!
-  support: String!
-  bloque: String!
-  year: Float!
-  author: [AuthorType!]!
-  title: String!
-  country: String!
-  theme: String!
-  publication: String!
-  URL: String!
-  date: DateTime!
-  cantMin: Float!
-  broadcastMedium: String!
-  typology: String!
-  speaker: String!
-  dictionaryType: String!
-  century: String!
+  support: String
+  bloque: String
+  theme: String
+  publication: String
+  URL: String
+  cantMin: Float
+  broadcastMedium: String
+  typology: String
+  speaker: String
+  dictionaryType: String
+  century: String
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Mutation {
   createLemario(createdLemario: NewLemarioType!): CreatedLemarioType!
@@ -124,22 +110,17 @@ type CreatedSourcesType {
   file: String!
   type: String!
   subType: String!
-  support: String!
-  bloque: String!
-  year: Float!
-  author: [AuthorType!]!
-  title: String!
-  country: String!
-  theme: String!
-  publication: String!
-  URL: String!
-  date: DateTime!
-  cantMin: Float!
-  broadcastMedium: String!
-  typology: String!
-  speaker: String!
-  dictionaryType: String!
-  century: String!
+  support: String
+  bloque: String
+  theme: String
+  publication: String
+  URL: String
+  cantMin: Float
+  broadcastMedium: String
+  typology: String
+  speaker: String
+  dictionaryType: String
+  century: String
 }
 
 input NewSourcesType {
@@ -148,26 +129,17 @@ input NewSourcesType {
   file: String!
   type: String!
   subType: String!
-  support: String!
-  bloque: String!
-  year: Float!
-  author: [NewAuthorType!]!
-  title: String!
-  country: String!
-  theme: String!
-  publication: String!
-  URL: String!
-  date: DateTime!
-  cantMin: Float!
-  broadcastMedium: String!
-  typology: String!
-  speaker: String!
-  dictionaryType: String!
-  century: String!
-}
-
-input NewAuthorType {
-  name: String!
+  support: String
+  bloque: String
+  theme: String
+  publication: String
+  URL: String
+  cantMin: Float
+  broadcastMedium: String
+  typology: String
+  speaker: String
+  dictionaryType: String
+  century: String
 }
 
 input EditedSource {
@@ -177,20 +149,15 @@ input EditedSource {
   file: String!
   type: String!
   subType: String!
-  support: String!
-  bloque: String!
-  year: Float!
-  author: [NewAuthorType!]!
-  title: String!
-  country: String!
-  theme: String!
-  publication: String!
-  URL: String!
-  date: DateTime!
-  cantMin: Float!
-  broadcastMedium: String!
-  typology: String!
-  speaker: String!
-  dictionaryType: String!
-  century: String!
+  support: String
+  bloque: String
+  theme: String
+  publication: String
+  URL: String
+  cantMin: Float
+  broadcastMedium: String
+  typology: String
+  speaker: String
+  dictionaryType: String
+  century: String
 }

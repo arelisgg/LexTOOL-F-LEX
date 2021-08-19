@@ -25,10 +25,6 @@ export class SourcesService {
       subType,
       support,
       bloque,
-      year,
-      author,
-      title,
-      country,
       theme,
       publication,
 
@@ -36,7 +32,6 @@ export class SourcesService {
       URL,
 
       //linguisticas audio o video
-      date,
       cantMin,
       broadcastMedium,
       typology,
@@ -54,10 +49,6 @@ export class SourcesService {
       subType,
       support,
       bloque,
-      year,
-      author,
-      title,
-      country,
       theme,
       publication,
 
@@ -65,7 +56,6 @@ export class SourcesService {
       URL,
 
       //linguisticas audio o video
-      date,
       cantMin,
       broadcastMedium,
       typology,
@@ -90,10 +80,6 @@ export class SourcesService {
       //linguisticas libro o prensa
       support,
       bloque,
-      year,
-      author,
-      title,
-      country,
       theme,
       publication,
 
@@ -101,7 +87,6 @@ export class SourcesService {
       URL,
 
       //linguisticas audio o video
-      date,
       cantMin,
       broadcastMedium,
       typology,
@@ -121,10 +106,6 @@ export class SourcesService {
       //linguisticas libro o prensa
       support,
       bloque,
-      year,
-      author,
-      title,
-      country,
       theme,
       publication,
 
@@ -132,7 +113,6 @@ export class SourcesService {
       URL,
 
       //linguisticas audio o video
-      date,
       cantMin,
       broadcastMedium,
       typology,
@@ -175,10 +155,6 @@ export class SourcesService {
       //linguisticas libro o prensa
       oldSource.support = newSource.support;
       oldSource.bloque = newSource.bloque;
-      oldSource.year = newSource.year;
-      oldSource.author = newSource.author;
-      oldSource.title = newSource.title;
-      oldSource.country = newSource.country;
       oldSource.theme = newSource.theme;
       oldSource.publication = newSource.publication;
       
@@ -186,7 +162,6 @@ export class SourcesService {
       oldSource.URL = newSource.URL;
       
       //linguisticas audio o video
-      oldSource.date = newSource.date;
       oldSource.cantMin = newSource.cantMin;
       oldSource.broadcastMedium = newSource.broadcastMedium;
       oldSource.typology = newSource.typology;

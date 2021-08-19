@@ -1,5 +1,4 @@
 import { Document } from 'mongoose';
-import { Author } from './author.class';
 
 export interface Sources extends Document {
      name: String;
@@ -11,10 +10,6 @@ export interface Sources extends Document {
 
      // linguisticas libro o prensa
      bloque: String;
-     year: Number;
-     author: [Author];
-     title: String;
-     country: String;
      theme: String;
      publication: String;
 
@@ -22,7 +17,6 @@ export interface Sources extends Document {
      URL: String;
 
      //linguisticas audio o video
-     date: Date; 
      cantMin: Number;
      broadcastMedium: String;
      typology: String;

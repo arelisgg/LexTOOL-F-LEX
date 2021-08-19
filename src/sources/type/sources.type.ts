@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { InputType, Field, ID, ObjectType } from '@nestjs/graphql';
 
-import { AuthorType, NewAuthorType } from './author.type';
-
 @ObjectType({ isAbstract: true })
 export class TypeSource {
     @Field(() => ID)
@@ -19,43 +17,33 @@ export class TypeSource {
     subType: String;
 
     //linguisticas prensa o libro
-    @Field()
+    @Field({ nullable: true })
     support: String;
-    @Field()
+    @Field({ nullable: true })
     bloque: String;
-    @Field()
-    year: Number;
-    @Field(() => [AuthorType])
-    author: [AuthorType];
-    @Field()
-    title: String;
-    @Field()
-    country: String;
-    @Field()
+    @Field({ nullable: true })
     theme: String;
-    @Field()
+    @Field({ nullable: true })
     publication: String;
 
     //linguisticas internet
-    @Field()
+    @Field({ nullable: true })
     URL: String;
 
     //linguisticas audio o video
-    @Field()
-    date: Date;
-    @Field()
+    @Field({ nullable: true })
     cantMin: Number;
-    @Field()
+    @Field({ nullable: true })
     broadcastMedium: String;
-    @Field()
+    @Field({ nullable: true })
     typology: String;
-    @Field()
+    @Field({ nullable: true })
     speaker: String;
 
     //metalinguisticas
-    @Field()
+    @Field({ nullable: true })
     dictionaryType: String;
-    @Field()
+    @Field({ nullable: true })
     century: String;
 }
 
@@ -75,43 +63,33 @@ export class CreatedSourcesType {
     subType: String;
     
     //linguisticas prensa o libro
-    @Field()
+    @Field({ nullable: true })
     support: String;
-    @Field()
+    @Field({ nullable: true })
     bloque: String;
-    @Field()
-    year: Number;
-    @Field(() => [AuthorType])
-    author: [AuthorType];
-    @Field()
-    title: String;
-    @Field()
-    country: String;
-    @Field()
+    @Field({ nullable: true })
     theme: String;
-    @Field()
+    @Field({ nullable: true })
     publication: String;
 
     //linguisticas internet
-    @Field()
+    @Field({ nullable: true })
     URL: String;
 
     //linguisticas audio o video
-    @Field()
-    date: Date;
-    @Field()
+    @Field({ nullable: true })
     cantMin: Number;
-    @Field()
+    @Field({ nullable: true })
     broadcastMedium: String;
-    @Field()
+    @Field({ nullable: true })
     typology: String;
-    @Field()
+    @Field({ nullable: true })
     speaker: String;
 
     //metalinguisticas
-    @Field()
+    @Field({ nullable: true })
     dictionaryType: String;
-    @Field()
+    @Field({ nullable: true })
     century: String;
 }
 
@@ -127,45 +105,35 @@ export class NewSourcesType {
     type: String;
     @Field()
     subType: String;
-    
+
     //linguisticas prensa o libro
-    @Field()
+    @Field({ nullable: true })
     support: String;
-    @Field()
+    @Field({ nullable: true })
     bloque: String;
-    @Field()
-    year: Number;
-    @Field(() => [NewAuthorType])
-    author: [NewAuthorType];
-    @Field()
-    title: String;
-    @Field()
-    country: String;
-    @Field()
+    @Field({ nullable: true })
     theme: String;
-    @Field()
+    @Field({ nullable: true })
     publication: String;
 
     //linguisticas internet
-    @Field()
+    @Field({ nullable: true })
     URL: String;
 
     //linguisticas audio o video
-    @Field()
-    date: Date;
-    @Field()
+    @Field({ nullable: true })
     cantMin: Number;
-    @Field()
+    @Field({ nullable: true })
     broadcastMedium: String;
-    @Field()
+    @Field({ nullable: true })
     typology: String;
-    @Field()
+    @Field({ nullable: true })
     speaker: String;
 
     //metalinguisticas
-    @Field()
+    @Field({ nullable: true })
     dictionaryType: String;
-    @Field()
+    @Field({ nullable: true })
     century: String;
 }
 
@@ -184,43 +152,34 @@ export class EditedSource {
     @Field()
     subType: String;
     
+    
     //linguisticas prensa o libro
-    @Field()
+    @Field({ nullable: true })
     support: String;
-    @Field()
+    @Field({ nullable: true })
     bloque: String;
-    @Field()
-    year: Number;
-    @Field(() => [NewAuthorType])
-    author: [NewAuthorType];
-    @Field()
-    title: String;
-    @Field()
-    country: String;
-    @Field()
+    @Field({ nullable: true })
     theme: String;
-    @Field()
+    @Field({ nullable: true })
     publication: String;
 
     //linguisticas internet
-    @Field()
+    @Field({ nullable: true })
     URL: String;
 
     //linguisticas audio o video
-    @Field()
-    date: Date;
-    @Field()
+    @Field({ nullable: true })
     cantMin: Number;
-    @Field()
+    @Field({ nullable: true })
     broadcastMedium: String;
-    @Field()
+    @Field({ nullable: true })
     typology: String;
-    @Field()
+    @Field({ nullable: true })
     speaker: String;
 
     //metalinguisticas
-    @Field()
+    @Field({ nullable: true })
     dictionaryType: String;
-    @Field()
+    @Field({ nullable: true })
     century: String;
 }

@@ -1,4 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
+import { NewOcurrenceRecordType, OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
 
 
 @ObjectType()
@@ -15,7 +16,11 @@ export class EntryType {
   UF: String;
   @Field()
   source: String;
- }
+  @Field()
+  selected: Boolean;
+  @Field(()=>[OcurrenceRecordType],{ nullable: true })
+  documentation: OcurrenceRecordType[];
+}
 
 @ObjectType()
 export class CreatedEntryType {
@@ -31,6 +36,10 @@ export class CreatedEntryType {
   UF: String;
   @Field()
   source: String;
+  @Field()
+  selected: Boolean;
+  @Field(()=>[OcurrenceRecordType],{ nullable: true })
+  documentation: OcurrenceRecordType[];
 }
 
 @InputType()
@@ -45,6 +54,8 @@ export class NewEntryType {
   UF: String;
   @Field()
   source: String;
+  @Field()
+  selected: Boolean;
 }
 
 @InputType()
@@ -60,6 +71,7 @@ export class EditedEntryType {
   @Field()
   UF: String;
   @Field()
-  source: String;
-
+  source: String;  
+  @Field()
+  selected: Boolean;
 }

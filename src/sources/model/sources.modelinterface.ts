@@ -17,7 +17,7 @@ export interface Sources extends Document {
      URL: String;
 
      //linguisticas audio o video
-     cantMin: Number;
+     cantMin: String;
      broadcastMedium: String;
      typology: String;
      speaker: String;

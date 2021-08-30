@@ -6,6 +6,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Entry } from './model/entry.modelinterface';
 import { CreatedEntryType, NewEntryType, EntryType, EditedEntryType } from './type/entry.type';
 import { SourcesService } from 'src/sources/sources.service';
+import { OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
 @Injectable()
 export class EntryService {
   constructor(
@@ -19,12 +20,29 @@ export class EntryService {
     return e;
   }
 
+  async getAllEntriesWhithSourceRef() {
+    const e = await this.entryModel.find();
+    const entriesWhithSourceRef: EntryType[] = [];
+    if (e.length > 0) {
+      for (let i = 0; i < e.length; i++) {
+        const s = await this.sourceService.findByID(e[i].source);
+        if (s !== null) {
+          e[i].source = s.ref;
+          entriesWhithSourceRef.push(e[i]);
+        } else {
+          throw new Error(`Fuente no existe`);
+        }
+      }
+    }
+    return entriesWhithSourceRef;
+  }
+
   async getAllEntriesBySourceID(sourceID: String): Promise<EntryType[]> {
     const entries = await this.getAllEntries();
-    
+
     let entriesOfTheSource: EntryType[] = [];
-    if(entries.length > 0){
-      for(let i = 0; i < entries.length; i++ ){
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
         const e = entries[i];
         if (e.source === sourceID) {
           entriesOfTheSource.push(e);
@@ -34,6 +52,35 @@ export class EntryService {
     return entriesOfTheSource;
   }
 
+  async getAllSelectedEntries(): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+
+    let selectedEntries: EntryType[] = [];
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        if (e.selected) {
+          selectedEntries.push(e);
+        }
+      }
+    }
+    return selectedEntries;
+  }
+
+  async getAllVariations(entryID: String): Promise<OcurrenceRecordType[]> {
+    const entry = await this.entryModel.findById(entryID);
+    const ocurrences = entry.documentation;
+    let variations: OcurrenceRecordType[] = [];
+    if (ocurrences.length > 0) {
+      ocurrences.forEach(element => {
+        if (element.isVariation) {
+          variations.push(element);
+        }
+      });
+    }
+    return variations;
+  }
+
   async createEntry(createdEntry: NewEntryType) {
     const {
       lemma,
@@ -41,6 +88,7 @@ export class EntryService {
       UF,
       context,
       source,
+      selected,
     } = createdEntry;
 
     const e = new this.entryModel({
@@ -49,6 +97,7 @@ export class EntryService {
       UF,
       context,
       source,
+      selected,
     });
     await e.save();
     return e;
@@ -80,6 +129,7 @@ export class EntryService {
       oldEntry.context = newEntry.context;
       oldEntry.letter = newEntry.letter;
       oldEntry.source = newEntry.source;
+      oldEntry.selected = newEntry.selected;
 
       oldEntry.save();
       console.log('oldEntry:', oldEntry);

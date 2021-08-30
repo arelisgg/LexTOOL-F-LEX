@@ -7,37 +7,52 @@ export class EntryResolver {
 
   constructor(private entryService: EntryService) {
   }
-  
+
   @Query(() => [EntryType])
   async findAllEntries() {
-  return await this.entryService.getAllEntries();
- }
+    return await this.entryService.getAllEntries();
+  }
 
- @Query(() => EntryType)
- async getEntryByID(@Args('entryID') entryID: String) {
-   return this.entryService.findByID(entryID);
- }
+  @Query(() => EntryType)
+  async getEntryByID(@Args('entryID') entryID: String) {
+    return this.entryService.findByID(entryID);
+  }
 
- @Query(() => [EntryType])
- async getAllEntriesBySourceID(@Args('sourceID') sourceID: String) {
-   return this.entryService.getAllEntriesBySourceID(sourceID);
- }
+  @Query(() => [EntryType])
+  async findAllEntriesWhithSourceRef() {
+    return this.entryService.getAllEntriesWhithSourceRef();
+  }
 
- @Mutation(() => CreatedEntryType)
+  @Query(() => [EntryType])
+  async getAllEntriesBySourceID(@Args('sourceID') sourceID: String) {
+    return this.entryService.getAllEntriesBySourceID(sourceID);
+  }
+
+  @Query(() => [EntryType])
+  async getAllSelectedEntries() {
+    return this.entryService.getAllSelectedEntries();
+  }
+
+  @Query(() => [EntryType])
+  async getAllVariations(@Args('entryID') entryID: String) {
+    return this.entryService.getAllVariations(entryID);
+  }
+
+  @Mutation(() => CreatedEntryType)
   async createEntry(@Args('createdEntry') createdEntry: NewEntryType) {
-  return await this.entryService.createEntry(createdEntry);
- }
+    return await this.entryService.createEntry(createdEntry);
+  }
 
- @Mutation(() => EntryType)
+  @Mutation(() => EntryType)
   async deleteEntryByID(@Args('entryID') entryID: String) {
     console.log(entryID);
     return this.entryService.deleteEntry(entryID);
   }
 
   @Mutation(() => EntryType)
-      async updateEntryByID(
-        @Args('newEntry' ) newEntry: EditedEntryType) {
-      console.log(newEntry);
-      return this.entryService.editEntry(newEntry);
-    }
+  async updateEntryByID(
+    @Args('newEntry') newEntry: EditedEntryType) {
+    console.log(newEntry);
+    return this.entryService.editEntry(newEntry);
+  }
 }

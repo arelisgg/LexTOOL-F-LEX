@@ -19,7 +19,7 @@ export class MinioController {
   @Get('/:name')
   async getFile(@Param('name') name: string, @Res() res: Response) {
     const result = (await this.service.getFile(name)).pipe(res);
-    console.log('controller:', result);
+    console.log('controllerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr:', result);
     return result;
   }
 

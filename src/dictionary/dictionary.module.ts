@@ -8,7 +8,7 @@ import { LemarioModule } from 'src/lemario/lemario.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Dictionary', schema: DictionarySchema }]),
+    MongooseModule.forFeature([{ name: 'DictionaryA', schema: DictionarySchema }]),
     SourcesModule,
     LemarioModule,
   ],

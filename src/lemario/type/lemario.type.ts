@@ -27,7 +27,7 @@ export class NewLemarioType {
     @Field({ nullable: true })
     name: String;
     @Field(()=>[NewEntryType],{ nullable: true })
-    entries: NewEntryType[]; 
+    entries: NewEntryType[];
 }
 
 @InputType()

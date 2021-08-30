@@ -4,13 +4,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { LemarioModule } from './lemario/lemario.module';
 import { SourcesModule } from './sources/sources.module';
 import { GraphQLModule } from '@nestjs/graphql';
-import { DictionaryModule } from './dictionary/dictionary.module';
 import { MinioModule } from './minio/minio.module';
 import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/Dictionary', {
+    MongooseModule.forRoot('mongodb://localhost/Lextool-F-Lex', {
       useFindAndModify: false,
     }),
     MulterModule.register({

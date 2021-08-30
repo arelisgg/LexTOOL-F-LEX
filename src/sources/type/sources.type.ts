@@ -32,7 +32,7 @@ export class TypeSource {
 
     //linguisticas audio o video
     @Field({ nullable: true })
-    cantMin: Number;
+    cantMin: String;
     @Field({ nullable: true })
     broadcastMedium: String;
     @Field({ nullable: true })
@@ -78,7 +78,7 @@ export class CreatedSourcesType {
 
     //linguisticas audio o video
     @Field({ nullable: true })
-    cantMin: Number;
+    cantMin: String;
     @Field({ nullable: true })
     broadcastMedium: String;
     @Field({ nullable: true })
@@ -122,7 +122,7 @@ export class NewSourcesType {
 
     //linguisticas audio o video
     @Field({ nullable: true })
-    cantMin: Number;
+    cantMin: String;
     @Field({ nullable: true })
     broadcastMedium: String;
     @Field({ nullable: true })
@@ -169,7 +169,7 @@ export class EditedSource {
 
     //linguisticas audio o video
     @Field({ nullable: true })
-    cantMin: Number;
+    cantMin: String;
     @Field({ nullable: true })
     broadcastMedium: String;
     @Field({ nullable: true })

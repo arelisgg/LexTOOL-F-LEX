@@ -21,8 +21,18 @@ export const EntrySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  source:{
+  source: {
     type: String,
     required: true,
   },
+  selected: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  documentation: {
+    type: [mongoose.Schema.Types.ObjectId],
+    required: false,
+    ref: 'OcurrenceRecord',
+  }
 });

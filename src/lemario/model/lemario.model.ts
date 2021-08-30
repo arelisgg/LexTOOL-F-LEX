@@ -9,8 +9,8 @@ export const LemarioSchema = new mongoose.Schema({
     },
     entries:{
         type: [mongoose.Schema.Types.ObjectId],
-        required: true,
+        required: false,
         default: [null],
         ref: 'Entry',
-    }
+    },
 });

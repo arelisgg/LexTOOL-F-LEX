@@ -63,6 +63,8 @@ type Query {
   getAllVariations(entryID: String!): [EntryType!]!
   getSourceByID(sourceID: String!): TypeSource!
   findAllSources: [TypeSource!]!
+  getAllOcurrenceRecords: [OcurrenceRecordType!]!
+  getOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
 }
 
 type TypeSource {
@@ -75,14 +77,20 @@ type TypeSource {
   support: String
   bloque: String
   theme: String
-  publication: String
+  provice_p: String
+  session_p: String
+  magazine_type_p: String
   URL: String
   cantMin: String
   broadcastMedium: String
   typology: String
   speaker: String
+  recording_date: String
+  broadcast_date: String
   dictionaryType: String
   century: String
+  library_name: String
+  url_location: String
 }
 
 type Mutation {
@@ -136,14 +144,20 @@ type CreatedSourcesType {
   support: String
   bloque: String
   theme: String
-  publication: String
+  provice_p: String
+  session_p: String
+  magazine_type_p: String
   URL: String
   cantMin: String
   broadcastMedium: String
   typology: String
   speaker: String
+  recording_date: String
+  broadcast_date: String
   dictionaryType: String
   century: String
+  library_name: String
+  url_location: String
 }
 
 input NewSourcesType {
@@ -155,14 +169,20 @@ input NewSourcesType {
   support: String
   bloque: String
   theme: String
-  publication: String
+  provice_p: String
+  session_p: String
+  magazine_type_p: String
   URL: String
   cantMin: String
   broadcastMedium: String
   typology: String
   speaker: String
+  recording_date: String
+  broadcast_date: String
   dictionaryType: String
   century: String
+  library_name: String
+  url_location: String
 }
 
 input EditedSource {
@@ -175,12 +195,18 @@ input EditedSource {
   support: String
   bloque: String
   theme: String
-  publication: String
+  provice_p: String
+  session_p: String
+  magazine_type_p: String
   URL: String
   cantMin: String
   broadcastMedium: String
   typology: String
   speaker: String
+  recording_date: String
+  broadcast_date: String
   dictionaryType: String
   century: String
+  library_name: String
+  url_location: String
 }

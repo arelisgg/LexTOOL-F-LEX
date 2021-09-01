@@ -24,7 +24,11 @@ export class TypeSource {
     @Field({ nullable: true })
     theme: String;
     @Field({ nullable: true })
-    publication: String;
+    provice_p: String;
+    @Field({ nullable: true })
+    session_p: String;
+    @Field({ nullable: true })
+    magazine_type_p: String;
 
     //linguisticas internet
     @Field({ nullable: true })
@@ -39,12 +43,20 @@ export class TypeSource {
     typology: String;
     @Field({ nullable: true })
     speaker: String;
+    @Field({ nullable: true })
+    recording_date: String;
+    @Field({ nullable: true })
+    broadcast_date: String;
 
     //metalinguisticas
     @Field({ nullable: true })
     dictionaryType: String;
     @Field({ nullable: true })
     century: String;
+    @Field({ nullable: true })
+    library_name: String;
+    @Field({ nullable: true })
+    url_location: String;
 }
 
 @ObjectType({ isAbstract: true })
@@ -61,7 +73,7 @@ export class CreatedSourcesType {
     type: String;
     @Field()
     subType: String;
-    
+
     //linguisticas prensa o libro
     @Field({ nullable: true })
     support: String;
@@ -70,7 +82,11 @@ export class CreatedSourcesType {
     @Field({ nullable: true })
     theme: String;
     @Field({ nullable: true })
-    publication: String;
+    provice_p: String;
+    @Field({ nullable: true })
+    session_p: String;
+    @Field({ nullable: true })
+    magazine_type_p: String;
 
     //linguisticas internet
     @Field({ nullable: true })
@@ -85,12 +101,20 @@ export class CreatedSourcesType {
     typology: String;
     @Field({ nullable: true })
     speaker: String;
+    @Field({ nullable: true })
+    recording_date: String;
+    @Field({ nullable: true })
+    broadcast_date: String;
 
     //metalinguisticas
     @Field({ nullable: true })
     dictionaryType: String;
     @Field({ nullable: true })
     century: String;
+    @Field({ nullable: true })
+    library_name: String;
+    @Field({ nullable: true })
+    url_location: String;
 }
 
 @InputType({ isAbstract: true })
@@ -114,7 +138,11 @@ export class NewSourcesType {
     @Field({ nullable: true })
     theme: String;
     @Field({ nullable: true })
-    publication: String;
+    provice_p: String;
+    @Field({ nullable: true })
+    session_p: String;
+    @Field({ nullable: true })
+    magazine_type_p: String;
 
     //linguisticas internet
     @Field({ nullable: true })
@@ -129,12 +157,20 @@ export class NewSourcesType {
     typology: String;
     @Field({ nullable: true })
     speaker: String;
+    @Field({ nullable: true })
+    recording_date: String;
+    @Field({ nullable: true })
+    broadcast_date: String;
 
     //metalinguisticas
     @Field({ nullable: true })
     dictionaryType: String;
     @Field({ nullable: true })
     century: String;
+    @Field({ nullable: true })
+    library_name: String;
+    @Field({ nullable: true })
+    url_location: String;
 }
 
 @InputType({ isAbstract: true })
@@ -151,8 +187,7 @@ export class EditedSource {
     type: String;
     @Field()
     subType: String;
-    
-    
+
     //linguisticas prensa o libro
     @Field({ nullable: true })
     support: String;
@@ -161,7 +196,11 @@ export class EditedSource {
     @Field({ nullable: true })
     theme: String;
     @Field({ nullable: true })
-    publication: String;
+    provice_p: String;
+    @Field({ nullable: true })
+    session_p: String;
+    @Field({ nullable: true })
+    magazine_type_p: String;
 
     //linguisticas internet
     @Field({ nullable: true })
@@ -176,10 +215,18 @@ export class EditedSource {
     typology: String;
     @Field({ nullable: true })
     speaker: String;
+    @Field({ nullable: true })
+    recording_date: String;
+    @Field({ nullable: true })
+    broadcast_date: String;
 
     //metalinguisticas
     @Field({ nullable: true })
     dictionaryType: String;
     @Field({ nullable: true })
     century: String;
+    @Field({ nullable: true })
+    library_name: String;
+    @Field({ nullable: true })
+    url_location: String;
 }

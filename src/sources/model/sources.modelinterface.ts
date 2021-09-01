@@ -11,7 +11,9 @@ export interface Sources extends Document {
      // linguisticas libro o prensa
      bloque: String;
      theme: String;
-     publication: String;
+     provice_p: String;
+     session_p: String;
+     magazine_type_p: String;
 
      //linguisticas internet
      URL: String;
@@ -21,8 +23,12 @@ export interface Sources extends Document {
      broadcastMedium: String;
      typology: String;
      speaker: String;
+     recording_date: String;
+     broadcast_date: String;
 
      //metalinguisticas
      dictionaryType: String;
      century: String;
+     library_name: String;
+     url_location: String;
 }

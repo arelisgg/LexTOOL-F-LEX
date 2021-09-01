@@ -26,8 +26,13 @@ export class SourcesService {
       support,
       bloque,
       theme,
-      publication,
-
+      broadcast_date,
+      library_name,
+      magazine_type_p,
+      provice_p,
+      recording_date,
+      session_p,
+      url_location,
       //linguisticas internet
       URL,
 
@@ -50,7 +55,13 @@ export class SourcesService {
       support,
       bloque,
       theme,
-      publication,
+      broadcast_date,
+      library_name,
+      magazine_type_p,
+      provice_p,
+      recording_date,
+      session_p,
+      url_location,
 
       //linguisticas internet
       URL,
@@ -64,63 +75,6 @@ export class SourcesService {
       //metalinguisticas
       dictionaryType,
       century,
-    });
-    await s.save();
-    return s;
-  }
-
-  async createDictionarySource(source: NewSourcesType): Promise<TypeSource> {
-    const {
-      file,
-      name,
-      ref,
-      type,
-      subType,
-
-      //linguisticas libro o prensa
-      support,
-      bloque,
-      theme,
-      publication,
-
-      //linguisticas internet
-      URL,
-
-      //linguisticas audio o video
-      cantMin,
-      broadcastMedium,
-      typology,
-      speaker,
-
-      //metalinguisticas
-      dictionaryType,
-      century
-    } = source;
-    const s = new this.sourcesModel({
-      file,
-      name,
-      ref,
-      type,
-      subType,
-
-      //linguisticas libro o prensa
-      support,
-      bloque,
-      theme,
-      publication,
-
-      //linguisticas internet
-      URL,
-
-      //linguisticas audio o video
-      cantMin,
-      broadcastMedium,
-      typology,
-      speaker,
-
-      //metalinguisticas
-      dictionaryType,
-      century
     });
     await s.save();
     return s;
@@ -156,7 +110,13 @@ export class SourcesService {
       oldSource.support = newSource.support;
       oldSource.bloque = newSource.bloque;
       oldSource.theme = newSource.theme;
-      oldSource.publication = newSource.publication;
+      oldSource.broadcast_date = newSource.broadcast_date;
+      oldSource.library_name = newSource.library_name;
+      oldSource.magazine_type_p = newSource.magazine_type_p;
+      oldSource.provice_p = newSource.provice_p;
+      oldSource.recording_date = newSource.recording_date;
+      oldSource.session_p = newSource.session_p;
+      oldSource.url_location = newSource.url_location;
       
       //linguisticas internet
       oldSource.URL = newSource.URL;

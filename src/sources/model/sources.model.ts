@@ -38,7 +38,17 @@ export const SourcesSchema = new mongoose.Schema({
         required: false,
         default: null,
     },
-    publication: {
+    provice_p: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    session_p: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    magazine_type_p: {
         type: String,
         required: false,
         default: null,
@@ -72,6 +82,16 @@ export const SourcesSchema = new mongoose.Schema({
         required: false,
         default: null,
     },
+    recording_date: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    broadcast_date: {
+        type: String,
+        required: false,
+        default: null,
+    },
 
     //metalinguisticas
     dictionaryType: {
@@ -80,6 +100,16 @@ export const SourcesSchema = new mongoose.Schema({
         default: null,
     },
     century: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    library_name: {
+        type: String,
+        required: false,
+        default: null,
+    },
+    url_location: {
         type: String,
         required: false,
         default: null,

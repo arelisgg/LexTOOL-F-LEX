@@ -5,7 +5,7 @@ import { OcurrenceRecordService } from './ocurrenceRecord.service';
 
 @Resolver()
 export class OcurrenceRecordResolver {
-  constructor(private readonly OcurrenceRecordService: OcurrenceRecordService) {}
+  constructor(private readonly OcurrenceRecordService: OcurrenceRecordService) { }
 
   @Query(() => [OcurrenceRecordType])
   async getAllOcurrenceRecords() {
@@ -15,5 +15,23 @@ export class OcurrenceRecordResolver {
   @Query(() => OcurrenceRecordType)
   async getOcurrenceRecordByID(@Args('orID') orID: String) {
     return await this.OcurrenceRecordService.findByID(orID);
+  }
+  @Mutation(() => CreatedOcurrenceRecordType)
+  async createOcurrenceRecord(
+    @Args('newOcurrenceRecord') newOcurrenceRecord: NewOcurrenceRecordType
+  ) {
+    return await this.OcurrenceRecordService.createOcurrenceRecord(newOcurrenceRecord);
+  }
+  @Mutation(() => OcurrenceRecordType)
+  async deleteOcurrenceRecordByID(@Args('orID') orID: String) {
+    console.log(orID);
+    return this.OcurrenceRecordService.deleteOcurrenceRecordByID(orID);
+  }
+
+  @Mutation(() => OcurrenceRecordType)
+  async editOcurrenceRecord(
+    @Args('newOcurrenceRecord') newOcurrenceRecord: NewOcurrenceRecordType) {
+    console.log(newOcurrenceRecord);
+    return this.OcurrenceRecordService.editOcurrenceRecord(newOcurrenceRecord);
   }
 }

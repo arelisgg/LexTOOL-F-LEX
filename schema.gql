@@ -2,21 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AppearanceType {
-  useContext: String!
-  contextSource: String!
-}
-
-type OcurrenceRecordType {
-  id: ID!
-  corpus_treasure: String!
-  numAppearance: Float!
-  numSources: Float!
-  appearances: [AppearanceType!]!
-  isVariation: Boolean!
-  variationUF: String!
-}
-
 type EntryType {
   id: ID!
   lemma: String!
@@ -25,7 +10,7 @@ type EntryType {
   UF: String!
   source: String!
   selected: Boolean!
-  documentation: [OcurrenceRecordType!]
+  documentation: [String!]
 }
 
 type CreatedEntryType {
@@ -36,7 +21,7 @@ type CreatedEntryType {
   UF: String!
   source: String!
   selected: Boolean!
-  documentation: [OcurrenceRecordType!]
+  documentation: [String!]
 }
 
 type LemarioType {
@@ -51,16 +36,44 @@ type CreatedLemarioType {
   entries: [EntryType!]!
 }
 
+type AppearanceType {
+  useContext: String!
+  contextSource: String!
+}
+
+type OcurrenceRecordType {
+  id: ID!
+  corpus_treasure: String!
+  numAppearance: Float!
+  numSources: Float!
+  appearances: [AppearanceType!]
+  isVariation: Boolean
+  variationUF: String
+  status: String!
+}
+
+type CreatedOcurrenceRecordType {
+  id: ID!
+  corpus_treasure: String!
+  numAppearance: Float!
+  numSources: Float!
+  appearances: [AppearanceType!]
+  isVariation: Boolean
+  variationUF: String
+  status: String!
+}
+
 type Query {
   findAllLemarios: [LemarioType!]!
   getLemarioByID(lemarioID: String!): LemarioType!
   findAllEntriesBylemarioID(lemarioID: String!): [EntryType!]!
   findAllEntries: [EntryType!]!
+  findAllEntriesWithDocs: [EntryType!]!
   getEntryByID(entryID: String!): EntryType!
-  findAllEntriesWhithSourceRef: [EntryType!]!
+  getEntryByIDWithDocs(entryID: String!): EntryType!
+  findAllEntriesWithSourceRef: [EntryType!]!
   getAllEntriesBySourceID(sourceID: String!): [EntryType!]!
   getAllSelectedEntries: [EntryType!]!
-  getAllVariations(entryID: String!): [EntryType!]!
   getSourceByID(sourceID: String!): TypeSource!
   findAllSources: [TypeSource!]!
   getAllOcurrenceRecords: [OcurrenceRecordType!]!
@@ -100,9 +113,13 @@ type Mutation {
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
   updateEntryByID(newEntry: EditedEntryType!): EntryType!
+  updateEntryDocumentation(newEntry: EditedEntryType!): EntryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
   deleteSourceByID(SourceID: String!): TypeSource!
   updateSourceByID(source: EditedSource!): TypeSource!
+  createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): CreatedOcurrenceRecordType!
+  deleteOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
+  editOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
 }
 
 input NewLemarioType {
@@ -126,12 +143,13 @@ input EditedLemarioType {
 
 input EditedEntryType {
   id: ID!
-  lemma: String!
+  lemma: String
   letter: String
-  context: String!
-  UF: String!
-  source: String!
-  selected: Boolean!
+  context: String
+  UF: String
+  source: String
+  selected: Boolean
+  documentation: [String!]
 }
 
 type CreatedSourcesType {
@@ -209,4 +227,19 @@ input EditedSource {
   century: String
   library_name: String
   url_location: String
+}
+
+input NewOcurrenceRecordType {
+  corpus_treasure: String!
+  numAppearance: Float!
+  numSources: Float!
+  appearances: [NewAppearanceType!]
+  isVariation: Boolean
+  variationUF: String
+  status: String!
+}
+
+input NewAppearanceType {
+  useContext: String!
+  contextSource: String!
 }

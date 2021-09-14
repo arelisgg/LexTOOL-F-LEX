@@ -8,4 +8,5 @@ export interface OcurrenceRecord extends Document {
     appearances: [Appearence],
     isVariation: Boolean,
     variationUF: String,
+    status: String,
 }

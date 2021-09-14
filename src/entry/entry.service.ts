@@ -6,12 +6,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Entry } from './model/entry.modelinterface';
 import { CreatedEntryType, NewEntryType, EntryType, EditedEntryType } from './type/entry.type';
 import { SourcesService } from 'src/sources/sources.service';
-import { OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
+import { OcurrenceRecordService } from 'src/ocurrenceRecord/ocurrenceRecord.service';
 @Injectable()
 export class EntryService {
   constructor(
     @InjectModel('Entry') private readonly entryModel: Model<Entry>,
     private readonly sourceService: SourcesService,
+    private readonly orService: OcurrenceRecordService,
   ) { }
 
 
@@ -20,27 +21,32 @@ export class EntryService {
     return e;
   }
 
-  async getAllEntriesWhithSourceRef() {
+  async getAllEntriesWithDocs() {
     const e = await this.entryModel.find();
-    const entriesWhithSourceRef: EntryType[] = [];
+    return e;
+  }
+
+  async getAllEntriesWithSourceRef() {
+    const e = await this.entryModel.find();
+    const entriesWithSourceRef = [];
     if (e.length > 0) {
       for (let i = 0; i < e.length; i++) {
         const s = await this.sourceService.findByID(e[i].source);
         if (s !== null) {
           e[i].source = s.ref;
-          entriesWhithSourceRef.push(e[i]);
+          entriesWithSourceRef.push(e[i]);
         } else {
           throw new Error(`Fuente no existe`);
         }
       }
     }
-    return entriesWhithSourceRef;
+    return entriesWithSourceRef;
   }
 
   async getAllEntriesBySourceID(sourceID: String): Promise<EntryType[]> {
     const entries = await this.getAllEntries();
 
-    let entriesOfTheSource: EntryType[] = [];
+    let entriesOfTheSource = [];
     if (entries.length > 0) {
       for (let i = 0; i < entries.length; i++) {
         const e = entries[i];
@@ -55,7 +61,7 @@ export class EntryService {
   async getAllSelectedEntries(): Promise<EntryType[]> {
     const entries = await this.getAllEntries();
 
-    let selectedEntries: EntryType[] = [];
+    let selectedEntries = [];
     if (entries.length > 0) {
       for (let i = 0; i < entries.length; i++) {
         const e = entries[i];
@@ -65,20 +71,6 @@ export class EntryService {
       }
     }
     return selectedEntries;
-  }
-
-  async getAllVariations(entryID: String): Promise<OcurrenceRecordType[]> {
-    const entry = await this.entryModel.findById(entryID);
-    const ocurrences = entry.documentation;
-    let variations: OcurrenceRecordType[] = [];
-    if (ocurrences.length > 0) {
-      ocurrences.forEach(element => {
-        if (element.isVariation) {
-          variations.push(element);
-        }
-      });
-    }
-    return variations;
   }
 
   async createEntry(createdEntry: NewEntryType) {
@@ -108,6 +100,11 @@ export class EntryService {
     return entry;
   }
 
+  async findByIDWithDocs(entryID: String) {
+    const entry = await this.entryModel.findById(entryID);
+    return entry;
+  }
+
   async deleteEntry(entryID: String) {
     const e = await (await this.entryModel.findById(entryID));
     if (!e) {
@@ -131,6 +128,30 @@ export class EntryService {
       oldEntry.source = newEntry.source;
       oldEntry.selected = newEntry.selected;
 
+      oldEntry.save();
+      console.log('oldEntry:', oldEntry);
+
+      return oldEntry;
+    } else {
+      throw new Error('No existe la entrada');
+    }
+  }
+
+  async editEntryDocumentation(newEntry: EditedEntryType) {
+    let oldEntry = await this.entryModel
+      .findById(newEntry.id)
+      .exec();
+    let d = newEntry.documentation;
+    if (oldEntry) {
+      for (let index = 0; index < d.length; index++) {
+        const id = d[index];
+        let or = await this.orService.findByID(id);
+        if (or) {
+         oldEntry.documentation.push(or.id);
+        } else {
+         throw new Error(`Registro de Ocurrencia con id: ${id} no existe`);
+        }
+      }
       oldEntry.save();
       console.log('oldEntry:', oldEntry);
 

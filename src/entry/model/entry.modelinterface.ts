@@ -8,5 +8,5 @@ export interface Entry extends Document {
  UF: String;
  source: String;
  selected: Boolean;
- documentation: OcurrenceRecord[];
+ documentation: String[];
 }

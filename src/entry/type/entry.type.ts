@@ -1,5 +1,5 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-import { NewOcurrenceRecordType, OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
+//import { EditedOcurrenceRecordType, OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
 
 
 @ObjectType()
@@ -18,8 +18,8 @@ export class EntryType {
   source: String;
   @Field()
   selected: Boolean;
-  @Field(()=>[OcurrenceRecordType],{ nullable: true })
-  documentation: OcurrenceRecordType[];
+  @Field(()=>[String],{ nullable: true })
+  documentation: String[];
 }
 
 @ObjectType()
@@ -38,8 +38,8 @@ export class CreatedEntryType {
   source: String;
   @Field()
   selected: Boolean;
-  @Field(()=>[OcurrenceRecordType],{ nullable: true })
-  documentation: OcurrenceRecordType[];
+  @Field(()=>[String],{ nullable: true })
+  documentation: String[];
 }
 
 @InputType()
@@ -62,16 +62,18 @@ export class NewEntryType {
 export class EditedEntryType {
   @Field(() => ID)
   id?: String;
-  @Field()
+  @Field({ nullable: true })
   lemma: String;
   @Field({ nullable: true })
   letter: String;
-  @Field()
+  @Field({ nullable: true })
   context: String;
-  @Field()
+  @Field({ nullable: true })
   UF: String;
-  @Field()
+  @Field({ nullable: true })
   source: String;  
-  @Field()
+  @Field({ nullable: true })
   selected: Boolean;
+  @Field(()=>[String],{ nullable: true })
+  documentation: String[];
 }

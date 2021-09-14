@@ -15,7 +15,8 @@ export class OcurrenceRecordService {
     }
 
     async findByID(orID: String) {
-        return await this.OcurrenceRecordModel.findById(orID);
+       let or = await this.OcurrenceRecordModel.findById(orID);
+       return or;
     }
 
     createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType) {
@@ -26,6 +27,7 @@ export class OcurrenceRecordService {
             numAppearance,
             numSources,
             variationUF,
+            status,
         } = newOcurrenceRecord;
         const or = new this.OcurrenceRecordModel({
             corpus_treasure,
@@ -34,6 +36,7 @@ export class OcurrenceRecordService {
             numAppearance,
             numSources,
             variationUF,
+            status,
         });
         or.save();
         return or;

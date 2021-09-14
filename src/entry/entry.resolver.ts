@@ -13,14 +13,24 @@ export class EntryResolver {
     return await this.entryService.getAllEntries();
   }
 
+  @Query(() => [EntryType])
+  async findAllEntriesWithDocs() {
+    return await this.entryService.getAllEntriesWithDocs();
+  }
+
   @Query(() => EntryType)
   async getEntryByID(@Args('entryID') entryID: String) {
     return this.entryService.findByID(entryID);
   }
 
+  @Query(() => EntryType)
+  async getEntryByIDWithDocs(@Args('entryID') entryID: String) {
+    return this.entryService.findByIDWithDocs(entryID);
+  }
+
   @Query(() => [EntryType])
-  async findAllEntriesWhithSourceRef() {
-    return this.entryService.getAllEntriesWhithSourceRef();
+  async findAllEntriesWithSourceRef() {
+    return this.entryService.getAllEntriesWithSourceRef();
   }
 
   @Query(() => [EntryType])
@@ -31,11 +41,6 @@ export class EntryResolver {
   @Query(() => [EntryType])
   async getAllSelectedEntries() {
     return this.entryService.getAllSelectedEntries();
-  }
-
-  @Query(() => [EntryType])
-  async getAllVariations(@Args('entryID') entryID: String) {
-    return this.entryService.getAllVariations(entryID);
   }
 
   @Mutation(() => CreatedEntryType)
@@ -54,5 +59,12 @@ export class EntryResolver {
     @Args('newEntry') newEntry: EditedEntryType) {
     console.log(newEntry);
     return this.entryService.editEntry(newEntry);
+  }
+
+  @Mutation(() => EntryType)
+  async updateEntryDocumentation(
+    @Args('newEntry') newEntry: EditedEntryType) {
+    console.log(newEntry);
+    return this.entryService.editEntryDocumentation(newEntry);
   }
 }

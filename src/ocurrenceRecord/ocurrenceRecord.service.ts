@@ -21,20 +21,18 @@ export class OcurrenceRecordService {
 
     createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType) {
         const {
-            corpus_treasure,
+            source,
             appearances,
             isVariation,
             numAppearance,
-            numSources,
             variationUF,
             status,
         } = newOcurrenceRecord;
         const or = new this.OcurrenceRecordModel({
-            corpus_treasure,
+            source,
             appearances,
             isVariation,
             numAppearance,
-            numSources,
             variationUF,
             status,
         });

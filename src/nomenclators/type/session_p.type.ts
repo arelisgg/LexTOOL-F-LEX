@@ -1,13 +1,13 @@
 import { InputType, ObjectType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class NewAppearanceType {
+export class NewSession_pType {
     @Field()
-    useContext: String;
+    nombre: String;
 }
 
 @ObjectType()
-export class AppearanceType {
+export class Session_pType {
     @Field()
-    useContext: String;
+    nombre: String;
 }

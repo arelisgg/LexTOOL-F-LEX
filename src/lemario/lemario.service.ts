@@ -91,7 +91,7 @@ export class LemarioService {
       throw new Error('Lemario dont exist');
     }
     l.entries.forEach(async eID => {
-      this.entryService.deleteEntry(eID);
+      this.entryService.deleteEntryByID(eID);
     });
     const deletedLemario = await l.deleteOne();
     console.log(deletedLemario);

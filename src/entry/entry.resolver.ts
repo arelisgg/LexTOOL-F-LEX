@@ -51,20 +51,27 @@ export class EntryResolver {
   @Mutation(() => EntryType)
   async deleteEntryByID(@Args('entryID') entryID: String) {
     console.log(entryID);
-    return this.entryService.deleteEntry(entryID);
+    return this.entryService.deleteEntryByID(entryID);
+  }
+
+  @Mutation(() => EntryType)
+  async deleteEntryDocByID(
+    @Args('orID') orID: String,
+    @Args('entryID') entryID: String
+    ){
+    console.log(entryID);
+    return this.entryService.deleteEntryDocByID(orID, entryID);
   }
 
   @Mutation(() => EntryType)
   async updateEntryByID(
     @Args('newEntry') newEntry: EditedEntryType) {
-    console.log(newEntry);
     return this.entryService.editEntry(newEntry);
   }
 
   @Mutation(() => EntryType)
   async updateEntryDocumentation(
     @Args('newEntry') newEntry: EditedEntryType) {
-    console.log(newEntry);
     return this.entryService.editEntryDocumentation(newEntry);
   }
 }

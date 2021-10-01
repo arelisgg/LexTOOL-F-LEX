@@ -10,10 +10,6 @@ export const SourcesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    file: {
-        type: String,
-        required: false,
-    },
     type: {
         type: String,
         required: true,

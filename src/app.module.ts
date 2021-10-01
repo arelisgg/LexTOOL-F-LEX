@@ -6,6 +6,7 @@ import { SourcesModule } from './sources/sources.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MinioModule } from './minio/minio.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { NomenclatorModule } from './nomenclators/nomenclator.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MulterModule } from '@nestjs/platform-express';
     }),
     GraphQLModule.forRoot({ autoSchemaFile: 'schema.gql' }),
     LemarioModule,
+    NomenclatorModule,
     MinioModule,
   ],
 })

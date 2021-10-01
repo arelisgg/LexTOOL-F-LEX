@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Sources } from './model/sources.modelinterface';
-import { CreatedSourcesType, EditedSource, NewSourcesType, TypeSource } from './type/sources.type';
+import { CreatedSourcesType, NewSourcesType, EditedSource, TypeSource } from './type/sources.type';
 
 @Injectable()
 export class SourcesService {
@@ -18,7 +18,6 @@ export class SourcesService {
 
   async createSource(source: NewSourcesType): Promise<TypeSource> {
     const {
-      file,
       name,
       ref,
       type,
@@ -47,7 +46,6 @@ export class SourcesService {
       century,
     } = source;
     const s = new this.sourcesModel({
-      file,
       name,
       ref,
       type,
@@ -100,7 +98,6 @@ export class SourcesService {
       .findById(newSource.id)
       .exec();
     if (oldSource) {
-      oldSource.file = newSource.file;
       oldSource.ref = newSource.ref;
       oldSource.name = newSource.name;
       oldSource.type = newSource.type;

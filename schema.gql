@@ -38,14 +38,12 @@ type CreatedLemarioType {
 
 type AppearanceType {
   useContext: String!
-  contextSource: String!
 }
 
 type OcurrenceRecordType {
   id: ID!
-  corpus_treasure: String!
+  source: String!
   numAppearance: Float!
-  numSources: Float!
   appearances: [AppearanceType!]
   isVariation: Boolean
   variationUF: String
@@ -54,13 +52,41 @@ type OcurrenceRecordType {
 
 type CreatedOcurrenceRecordType {
   id: ID!
-  corpus_treasure: String!
+  source: String!
   numAppearance: Float!
-  numSources: Float!
   appearances: [AppearanceType!]
   isVariation: Boolean
   variationUF: String
   status: String!
+}
+
+type DictionaryTypeType {
+  nombre: String!
+}
+
+type GenreType {
+  nombre: String!
+}
+
+type Session_pType {
+  nombre: String!
+}
+
+type ThemeType {
+  nombre: String!
+}
+
+type TypologyType {
+  nombre: String!
+}
+
+type NomenclatorType {
+  id: ID!
+  themes: [ThemeType!]
+  genres: [GenreType!]
+  sessions_p: [Session_pType!]
+  dictionaryTypes: [DictionaryTypeType!]
+  typologies: [TypologyType!]
 }
 
 type Query {
@@ -78,13 +104,17 @@ type Query {
   findAllSources: [TypeSource!]!
   getAllOcurrenceRecords: [OcurrenceRecordType!]!
   getOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
+  getAllThemes: [ThemeType!]!
+  getAllDictionaryTypes: [DictionaryTypeType!]!
+  getAllSessionsP: [Session_pType!]!
+  getAllTypologies: [TypologyType!]!
+  getAllGenres: [GenreType!]!
 }
 
 type TypeSource {
   id: ID!
   name: String!
   ref: String!
-  file: String!
   type: String!
   subType: String!
   support: String
@@ -112,6 +142,7 @@ type Mutation {
   updateLemarioByID(newLemario: EditedLemarioType!): LemarioType!
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
+  deleteEntryDocByID(entryID: String!, orID: String!): EntryType!
   updateEntryByID(newEntry: EditedEntryType!): EntryType!
   updateEntryDocumentation(newEntry: EditedEntryType!): EntryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
@@ -120,6 +151,14 @@ type Mutation {
   createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): CreatedOcurrenceRecordType!
   deleteOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
   editOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
+  createNomenclator(newNomenclator: NewNomenclatorType!): NomenclatorType!
+  addTheme(newTheme: NewThemeType!): NomenclatorType!
+  addGenres(newGenre: NewGenreType!): NomenclatorType!
+  addTypology(newTypology: NewTypologyType!): NomenclatorType!
+  addSessionP(newSessionP: NewSession_pType!): NomenclatorType!
+  addDictionaryType(newDictionaryType: NewDictionaryTypeType!): NomenclatorType!
+  deleteTheme(nombre: String!): NomenclatorType!
+  deleteGenre(nombre: String!): NomenclatorType!
 }
 
 input NewLemarioType {
@@ -156,7 +195,6 @@ type CreatedSourcesType {
   id: ID!
   name: String!
   ref: String!
-  file: String!
   type: String!
   subType: String!
   support: String
@@ -181,7 +219,6 @@ type CreatedSourcesType {
 input NewSourcesType {
   name: String!
   ref: String!
-  file: String!
   type: String!
   subType: String!
   support: String
@@ -207,7 +244,6 @@ input EditedSource {
   id: ID!
   name: String!
   ref: String!
-  file: String!
   type: String!
   subType: String!
   support: String
@@ -230,9 +266,8 @@ input EditedSource {
 }
 
 input NewOcurrenceRecordType {
-  corpus_treasure: String!
+  source: String!
   numAppearance: Float!
-  numSources: Float!
   appearances: [NewAppearanceType!]
   isVariation: Boolean
   variationUF: String
@@ -241,5 +276,32 @@ input NewOcurrenceRecordType {
 
 input NewAppearanceType {
   useContext: String!
-  contextSource: String!
+}
+
+input NewNomenclatorType {
+  themes: [NewThemeType!]
+  genres: [NewGenreType!]
+  sessions_p: [NewSession_pType!]
+  dictionaryTypes: [NewDictionaryTypeType!]
+  typologies: [NewTypologyType!]
+}
+
+input NewThemeType {
+  nombre: String!
+}
+
+input NewGenreType {
+  nombre: String!
+}
+
+input NewSession_pType {
+  nombre: String!
+}
+
+input NewDictionaryTypeType {
+  nombre: String!
+}
+
+input NewTypologyType {
+  nombre: String!
 }

@@ -105,14 +105,34 @@ export class EntryService {
     return entry;
   }
 
-  async deleteEntry(entryID: String) {
-    const e = await (await this.entryModel.findById(entryID));
+  async deleteEntryByID(entryID: String) {
+    const e = await this.entryModel.findById(entryID);
     if (!e) {
       throw new Error(`Entrada con id: ${entryID} no existe`);
     }
     const deletedEntry = await e.deleteOne();
     console.log(deletedEntry);
     return deletedEntry;
+  }
+
+  async deleteEntryDocByID(orID: String, entryID: String) {
+    const e = await this.entryModel.findById(entryID);
+    console.log(e);
+    if (!e) {
+      throw new Error(`Entrada con id: ${entryID} no existe`);
+    } else {
+      let f = false;
+      let d = e.documentation;
+      for (let j = 0; j < d.length && f === false; j++) {
+        if (orID === d[j]) {
+          f = true;
+          e.documentation.splice(j, 1);
+        }
+      }
+      e.save();
+      console.log(e);
+      return e;
+    }
   }
 
   async editEntry(newEntry: EditedEntryType) {
@@ -136,25 +156,21 @@ export class EntryService {
       throw new Error('No existe la entrada');
     }
   }
-
+  
   async editEntryDocumentation(newEntry: EditedEntryType) {
     let oldEntry = await this.entryModel
       .findById(newEntry.id)
       .exec();
     let d = newEntry.documentation;
+    let dOld = oldEntry.documentation;
     if (oldEntry) {
       for (let index = 0; index < d.length; index++) {
-        const id = d[index];
-        let or = await this.orService.findByID(id);
-        if (or) {
-         oldEntry.documentation.push(or.id);
-        } else {
-         throw new Error(`Registro de Ocurrencia con id: ${id} no existe`);
+        let isIncluded = dOld.includes(d[index]);
+        if (!isIncluded) {
+          oldEntry.documentation.push(d[index]);
         }
       }
       oldEntry.save();
-      console.log('oldEntry:', oldEntry);
-
       return oldEntry;
     } else {
       throw new Error('No existe la entrada');

@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 export const OcurrenceRecordSchema = new mongoose.Schema({
 
-  corpus_treasure: {
+  source: {
     type: String,
     required: true,
     default: null,
@@ -12,15 +12,9 @@ export const OcurrenceRecordSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-  numSources: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
   appearances: {
     type: [{
       useContext: String,
-      contextSource: String,
     }],
     required: true,
     default: null,

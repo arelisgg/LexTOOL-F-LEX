@@ -10,8 +10,6 @@ export class TypeSource {
     @Field()
     ref: String;
     @Field()
-    file: String;
-    @Field()
     type: String;
     @Field()
     subType: String;
@@ -68,8 +66,6 @@ export class CreatedSourcesType {
     @Field()
     ref: String;
     @Field()
-    file: String;
-    @Field()
     type: String;
     @Field()
     subType: String;
@@ -124,8 +120,6 @@ export class NewSourcesType {
     @Field()
     ref: String;
     @Field()
-    file: String;
-    @Field()
     type: String;
     @Field()
     subType: String;
@@ -173,6 +167,7 @@ export class NewSourcesType {
     url_location: String;
 }
 
+
 @InputType({ isAbstract: true })
 export class EditedSource {
     @Field(() => ID)
@@ -181,8 +176,6 @@ export class EditedSource {
     name: String;
     @Field()
     ref: String;
-    @Field()
-    file: String;
     @Field()
     type: String;
     @Field()

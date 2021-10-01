@@ -6,11 +6,9 @@ export class OcurrenceRecordType {
     @Field(() => ID)
     id?: String;
     @Field()
-    corpus_treasure: String;
+    source: String;
     @Field()
     numAppearance: Number;
-    @Field()
-    numSources: Number;
     @Field(() => [AppearanceType],{ nullable: true })
     appearances: [AppearanceType];
     @Field({ nullable: true })
@@ -26,11 +24,9 @@ export class CreatedOcurrenceRecordType {
     @Field(() => ID)
     id?: String;
     @Field()
-    corpus_treasure: String;
+    source: String;
     @Field()
     numAppearance: Number;
-    @Field()
-    numSources: Number;
     @Field(() => [AppearanceType], { nullable: true })
     appearances: [AppearanceType];
     @Field({ nullable: true })
@@ -44,11 +40,9 @@ export class CreatedOcurrenceRecordType {
 @InputType()
 export class NewOcurrenceRecordType {
     @Field()
-    corpus_treasure: String;
+    source: String;
     @Field()
     numAppearance: Number;
-    @Field()
-    numSources: Number;
     @Field(() => [NewAppearanceType], { nullable: true })
     appearances: [NewAppearanceType];
     @Field({ nullable: true })
@@ -64,11 +58,9 @@ export class EditedOcurrenceRecordType {
     @Field(() => ID)
     id?: String;
     @Field()
-    corpus_treasure: String;
+    source: String;
     @Field()
     numAppearance: Number;
-    @Field()
-    numSources: Number;
     @Field(() => [NewAppearanceType], { nullable: true })
     appearances: [NewAppearanceType];
     @Field({ nullable: true })

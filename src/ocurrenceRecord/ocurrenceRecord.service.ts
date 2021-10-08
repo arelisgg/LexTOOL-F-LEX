@@ -26,7 +26,6 @@ export class OcurrenceRecordService {
             isVariation,
             numAppearance,
             variationUF,
-            status,
         } = newOcurrenceRecord;
         const or = new this.OcurrenceRecordModel({
             source,
@@ -34,7 +33,6 @@ export class OcurrenceRecordService {
             isVariation,
             numAppearance,
             variationUF,
-            status,
         });
         or.save();
         return or;

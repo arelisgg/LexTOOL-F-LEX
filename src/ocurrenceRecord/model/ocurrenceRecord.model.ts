@@ -27,9 +27,4 @@ export const OcurrenceRecordSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  status: {
-    type: String,
-    required: true,
-    default: "En Proceso",
-  },
 });

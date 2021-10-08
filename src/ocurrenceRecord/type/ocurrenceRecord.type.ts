@@ -15,8 +15,6 @@ export class OcurrenceRecordType {
     isVariation: Boolean;
     @Field({ nullable: true })
     variationUF: String;
-    @Field()
-    status: String;
 }
 
 @ObjectType()
@@ -33,8 +31,6 @@ export class CreatedOcurrenceRecordType {
     isVariation: Boolean;
     @Field({ nullable: true })
     variationUF: String;
-    @Field()
-    status: String;
 }
 
 @InputType()
@@ -49,8 +45,6 @@ export class NewOcurrenceRecordType {
     isVariation: Boolean;
     @Field({ nullable: true })
     variationUF: String;
-    @Field()
-    status: String;
 }
 
 @InputType()
@@ -67,6 +61,4 @@ export class EditedOcurrenceRecordType {
     isVariation: Boolean;
     @Field({ nullable: true })
     variationUF: String;
-    @Field()
-    status: String;
 }

@@ -115,22 +115,20 @@ export class EntryService {
     return deletedEntry;
   }
 
-  async deleteEntryDocByID(orID: String, entryID: String) {
+  async deleteEntryDocByID(entryID: String, orID: String) {
     const e = await this.entryModel.findById(entryID);
-    console.log(e);
-    if (!e) {
+    if (e === null) {
       throw new Error(`Entrada con id: ${entryID} no existe`);
     } else {
       let f = false;
       let d = e.documentation;
       for (let j = 0; j < d.length && f === false; j++) {
-        if (orID === d[j]) {
-          f = true;
+        if (orID == d[j]) {
           e.documentation.splice(j, 1);
+          f = true;
         }
       }
       e.save();
-      console.log(e);
       return e;
     }
   }
@@ -156,7 +154,7 @@ export class EntryService {
       throw new Error('No existe la entrada');
     }
   }
-  
+
   async editEntryDocumentation(newEntry: EditedEntryType) {
     let oldEntry = await this.entryModel
       .findById(newEntry.id)

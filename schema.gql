@@ -47,7 +47,6 @@ type OcurrenceRecordType {
   appearances: [AppearanceType!]
   isVariation: Boolean
   variationUF: String
-  status: String!
 }
 
 type CreatedOcurrenceRecordType {
@@ -57,7 +56,6 @@ type CreatedOcurrenceRecordType {
   appearances: [AppearanceType!]
   isVariation: Boolean
   variationUF: String
-  status: String!
 }
 
 type DictionaryTypeType {
@@ -117,6 +115,7 @@ type TypeSource {
   ref: String!
   type: String!
   subType: String!
+  stage: String!
   support: String
   bloque: String
   theme: String
@@ -142,7 +141,7 @@ type Mutation {
   updateLemarioByID(newLemario: EditedLemarioType!): LemarioType!
   createEntry(createdEntry: NewEntryType!): CreatedEntryType!
   deleteEntryByID(entryID: String!): EntryType!
-  deleteEntryDocByID(entryID: String!, orID: String!): EntryType!
+  deleteEntryDocByID(orID: String!, entryID: String!): EntryType!
   updateEntryByID(newEntry: EditedEntryType!): EntryType!
   updateEntryDocumentation(newEntry: EditedEntryType!): EntryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
@@ -159,6 +158,9 @@ type Mutation {
   addDictionaryType(newDictionaryType: NewDictionaryTypeType!): NomenclatorType!
   deleteTheme(nombre: String!): NomenclatorType!
   deleteGenre(nombre: String!): NomenclatorType!
+  deleteSessionP(nombre: String!): NomenclatorType!
+  deleteTypology(nombre: String!): NomenclatorType!
+  deleteDictionaryType(nombre: String!): NomenclatorType!
 }
 
 input NewLemarioType {
@@ -197,6 +199,7 @@ type CreatedSourcesType {
   ref: String!
   type: String!
   subType: String!
+  stage: String!
   support: String
   bloque: String
   theme: String
@@ -221,6 +224,7 @@ input NewSourcesType {
   ref: String!
   type: String!
   subType: String!
+  stage: String!
   support: String
   bloque: String
   theme: String
@@ -246,6 +250,7 @@ input EditedSource {
   ref: String!
   type: String!
   subType: String!
+  stage: String!
   support: String
   bloque: String
   theme: String
@@ -271,7 +276,6 @@ input NewOcurrenceRecordType {
   appearances: [NewAppearanceType!]
   isVariation: Boolean
   variationUF: String
-  status: String!
 }
 
 input NewAppearanceType {

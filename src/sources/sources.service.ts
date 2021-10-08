@@ -25,6 +25,7 @@ export class SourcesService {
       support,
       bloque,
       theme,
+      stage,
       broadcast_date,
       library_name,
       magazine_type_p,
@@ -53,6 +54,7 @@ export class SourcesService {
       support,
       bloque,
       theme,
+      stage,
       broadcast_date,
       library_name,
       magazine_type_p,
@@ -102,6 +104,7 @@ export class SourcesService {
       oldSource.name = newSource.name;
       oldSource.type = newSource.type;
       oldSource.subType = newSource.subType;
+      oldSource.stage = newSource.stage;
 
       //linguisticas libro o prensa
       oldSource.support = newSource.support;
@@ -114,10 +117,10 @@ export class SourcesService {
       oldSource.recording_date = newSource.recording_date;
       oldSource.session_p = newSource.session_p;
       oldSource.url_location = newSource.url_location;
-      
+
       //linguisticas internet
       oldSource.URL = newSource.URL;
-      
+
       //linguisticas audio o video
       oldSource.cantMin = newSource.cantMin;
       oldSource.broadcastMedium = newSource.broadcastMedium;
@@ -127,7 +130,7 @@ export class SourcesService {
       //metalinguisticas
       oldSource.dictionaryType = newSource.dictionaryType;
       oldSource.century = newSource.century;
-      
+
       oldSource.save();
       console.log('oldSource:', oldSource);
 

@@ -13,7 +13,8 @@ export class TypeSource {
     type: String;
     @Field()
     subType: String;
-
+    @Field()
+    stage: String;
     //linguisticas prensa o libro
     @Field({ nullable: true })
     support: String;
@@ -69,6 +70,8 @@ export class CreatedSourcesType {
     type: String;
     @Field()
     subType: String;
+    @Field()
+    stage: String;
 
     //linguisticas prensa o libro
     @Field({ nullable: true })
@@ -123,6 +126,8 @@ export class NewSourcesType {
     type: String;
     @Field()
     subType: String;
+    @Field()
+    stage: String;
 
     //linguisticas prensa o libro
     @Field({ nullable: true })
@@ -180,6 +185,8 @@ export class EditedSource {
     type: String;
     @Field()
     subType: String;
+    @Field()
+    stage: String;
 
     //linguisticas prensa o libro
     @Field({ nullable: true })

@@ -28,6 +28,11 @@ export const SourcesSchema = new mongoose.Schema({
         required: false,
         default: null,
     },
+    stage: {
+        type: String,
+        required: false,
+        default: null,
+    },
     //linguisticas libro o prensa
     theme: {
         type: String,

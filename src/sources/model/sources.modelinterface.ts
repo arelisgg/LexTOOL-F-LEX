@@ -6,6 +6,7 @@ export interface Sources extends Document {
      type: String;
      subType: String;
      support: String;
+     stage: String;
 
      // linguisticas libro o prensa
      bloque: String;

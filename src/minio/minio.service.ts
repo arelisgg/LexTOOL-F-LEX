@@ -22,7 +22,6 @@ export class MinioService implements OnModuleInit {
 
   async getFile(name: string) {
     const img = await this.client.getObject('docs', name);
-    console.log('img:', img);
     return img;
   }
 

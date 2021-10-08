@@ -19,7 +19,6 @@ export class MinioController {
   @Get('/:name')
   async getFile(@Param('name') name: string, @Res() res: Response) {
     const result = (await this.service.getFile(name)).pipe(res);
-    console.log('controllerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr:', result);
     return result;
   }
 
@@ -30,9 +29,6 @@ export class MinioController {
     @Body() body,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log('name', name);
-    console.log('file', file);
-    console.log('body', body);
     // const lastDot = file.originalname.lastIndexOf('.');
     // const extension = file.originalname.substring(lastDot + 1);
     return this.service.uploadFile(name, file.buffer, file.size);

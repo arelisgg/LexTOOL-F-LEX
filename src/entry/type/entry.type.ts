@@ -1,15 +1,15 @@
 import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
-//import { EditedOcurrenceRecordType, OcurrenceRecordType } from 'src/ocurrenceRecord/type/ocurrenceRecord.type';
+import { LemmaType, NewLemmaType } from './lemma.type';
 
 
 @ObjectType()
 export class EntryType {
   @Field(() => ID)
   id?: String;
-  @Field()
-  lemma: String;
-  @Field({ nullable: true })
-  letter: String;
+  @Field(()=>[String],{ nullable: true })
+  letter: [String];
+  @Field(() => [LemmaType],{ nullable: true })
+  lemma: [LemmaType];
   @Field()
   context: String;
   @Field()
@@ -18,6 +18,12 @@ export class EntryType {
   source: String;
   @Field()
   selected: Boolean;
+  @Field({ nullable: true })
+  criteria: String;
+  @Field({ nullable: true })
+  included: String;
+  @Field({ nullable: true })
+  frecuency: String;
   @Field(()=>[String],{ nullable: true })
   documentation: String[];
 }
@@ -26,10 +32,10 @@ export class EntryType {
 export class CreatedEntryType {
   @Field(() => ID)
   id?: String;
-  @Field()
-  lemma: String;
-  @Field({ nullable: true })
-  letter: String;
+  @Field(() => [LemmaType],{ nullable: true })
+  lemma: [LemmaType];
+  @Field(()=>[String],{ nullable: true })
+  letter: [String];
   @Field()
   context: String;
   @Field()
@@ -38,16 +44,22 @@ export class CreatedEntryType {
   source: String;
   @Field()
   selected: Boolean;
+  @Field({ nullable: true })
+  criteria: String;
+  @Field({ nullable: true })
+  included: String;
+  @Field({ nullable: true })
+  frecuency: String;
   @Field(()=>[String],{ nullable: true })
   documentation: String[];
 }
 
 @InputType()
 export class NewEntryType {
-  @Field()
-  lemma: String;
-  @Field({ nullable: true })
-  letter: String;
+  @Field(() => [NewLemmaType],{ nullable: true })
+  lemma: [NewLemmaType];
+  @Field(()=>[String],{ nullable: true })
+  letter: [String];
   @Field()
   context: String;
   @Field()
@@ -56,16 +68,22 @@ export class NewEntryType {
   source: String;
   @Field()
   selected: Boolean;
+  @Field({ nullable: true })
+  criteria: String;
+  @Field({ nullable: true })
+  included: String;
+  @Field({ nullable: true })
+  frecuency: String;
 }
 
 @InputType()
 export class EditedEntryType {
   @Field(() => ID)
   id?: String;
-  @Field({ nullable: true })
-  lemma: String;
-  @Field({ nullable: true })
-  letter: String;
+  @Field(() => [NewLemmaType],{ nullable: true })
+  lemma: [NewLemmaType];
+  @Field(()=>[String],{ nullable: true })
+  letter: [String];
   @Field({ nullable: true })
   context: String;
   @Field({ nullable: true })
@@ -74,6 +92,12 @@ export class EditedEntryType {
   source: String;  
   @Field({ nullable: true })
   selected: Boolean;
+  @Field({ nullable: true })
+  criteria: String;
+  @Field({ nullable: true })
+  included: String;
+  @Field({ nullable: true })
+  frecuency: String;
   @Field(()=>[String],{ nullable: true })
   documentation: String[];
 }

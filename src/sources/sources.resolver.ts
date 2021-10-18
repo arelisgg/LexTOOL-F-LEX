@@ -22,6 +22,16 @@ export class SourcesResolver {
         return await this.sourceService.findAllSources();
       }
 
+      @Query(() => [TypeSource])
+      async findAllDocumentationtionSources() {
+        return await this.sourceService.findAllDocumentationtionSources();
+      }
+
+      @Query(() => [TypeSource])
+      async findAllExtractionSources() {
+        return await this.sourceService.findAllExtractionSources();
+      }
+
       @Mutation(() => TypeSource)
         async deleteSourceByID(@Args('SourceID') SourceID: String) {
         console.log(SourceID);

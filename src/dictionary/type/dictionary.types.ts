@@ -7,13 +7,13 @@ export class DictionaryType {
   @Field()
   name: String;
   @Field()
-  reference: String;
+  dictionaryType: String;
   @Field()
   description: String;
   @Field()
   state: String;
   @Field({ nullable: true })
-  lemario: String;
+  image: String;
 }
 
 
@@ -24,27 +24,30 @@ export class CreatedDictionaryType {
   @Field()
   name: String;
   @Field()
-  reference: String;
+  dictionaryType: String;
   @Field()
   description: String;
   @Field()
   state: String;
   @Field({ nullable: true })
-  lemario: String;
+  image: String;
 
 }
 
 @InputType()
 export class NewDictionaryType {
+  @Field(() => ID)
+  id?: String;
   @Field()
   name: String;
   @Field()
-  reference: String;
+  dictionaryType: String;
   @Field()
   description: String;
   @Field()
   state: String;
- 
+  @Field({ nullable: true })
+  image: String; 
 }
 
 @InputType()
@@ -54,11 +57,12 @@ export class EditedDictionaryType {
   @Field()
   name: String;
   @Field()
-  reference: String;
-  @Field() 
+  dictionaryType: String;
+  @Field()
   description: String;
   @Field()
   state: String;
-  
+  @Field({ nullable: true })
+  image: String;
 }
 

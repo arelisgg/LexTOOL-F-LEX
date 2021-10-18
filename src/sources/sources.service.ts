@@ -15,6 +15,38 @@ export class SourcesService {
     const e = await this.sourcesModel.find();
     return e;
   }
+  
+  async findAllExtractionSources() {
+    const sources = await this.sourcesModel.find();
+
+    let sourcesToExtract = [];
+    if (sources.length > 0) {
+      for (let i = 0; i < sources.length; i++) {
+        const e = sources[i];
+        const stage = e.stage;
+        if (stage == 'Extracción') {
+          sourcesToExtract.push(e);
+        }
+      }
+    }
+    return sourcesToExtract;
+  }
+
+  async findAllDocumentationtionSources() {
+    const sources = await this.sourcesModel.find();
+
+    let sourcesToDocument = [];
+    if (sources.length > 0) {
+      for (let i = 0; i < sources.length; i++) {
+        const e = sources[i];
+        const stage = e.stage;
+        if (stage == 'Documentación') {
+          sourcesToDocument.push(e);
+        }
+      }
+    }
+    return sourcesToDocument;
+  }
 
   async createSource(source: NewSourcesType): Promise<TypeSource> {
     const {

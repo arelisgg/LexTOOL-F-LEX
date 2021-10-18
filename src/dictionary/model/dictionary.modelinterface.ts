@@ -1,10 +1,9 @@
 import { Document } from 'mongoose';
 
-
 export interface Dictionary extends Document {
   name: String;
-  reference: String;
+  dictionaryType: String;
   description: String;
   state: String;
-  lemario: String;
+  image: String;
 }

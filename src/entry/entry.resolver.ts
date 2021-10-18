@@ -39,8 +39,28 @@ export class EntryResolver {
   }
 
   @Query(() => [EntryType])
-  async getAllSelectedEntries() {
-    return this.entryService.getAllSelectedEntries();
+  async getAllEntriesToDocument() {
+    return this.entryService.getAllEntriesToDocument();
+  }
+
+  @Query(() => [EntryType])
+  async getAllEntriesToSelect() {
+    return this.entryService.getAllEntriesToSelect();
+  }
+
+  @Query(() => [EntryType])
+  async getAllIncludedEntries() {
+    return this.entryService.getAllIncludedEntries();
+  }
+
+  @Query(() => [EntryType])
+  async getAllEntriesOfLemario() {
+    return this.entryService.getAllEntriesOfLemario();
+  }
+
+  @Query(() => [EntryType])
+  async getAllExcludedEntries() {
+    return this.entryService.getAllExcludedEntries();
   }
 
   @Mutation(() => CreatedEntryType)
@@ -73,5 +93,11 @@ export class EntryResolver {
   async updateEntryDocumentation(
     @Args('newEntry') newEntry: EditedEntryType) {
     return this.entryService.editEntryDocumentation(newEntry);
+  }
+
+  @Mutation(() => EntryType)
+  async updateEntryFrecuency(
+    @Args('entryID') entryID: String ){
+    return this.entryService.editEntryFrecuency(entryID);
   }
 }

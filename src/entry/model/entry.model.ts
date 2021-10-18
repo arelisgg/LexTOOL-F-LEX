@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 export const EntrySchema = new mongoose.Schema({
 
   letter: {
-    type: String,
+    type: [String],
     required: false,
     default: null,
   },
@@ -13,7 +13,9 @@ export const EntrySchema = new mongoose.Schema({
     default: null,
   },
   lemma: {
-    type: String,
+    type: [{
+      lemma: String,
+    }],
     required: false,
     default: null,
   },
@@ -29,6 +31,21 @@ export const EntrySchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  included: {
+    type: String,
+    required: false,
+    default: null,
+  },  
+  criteria: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  frecuency: {
+    type: String,
+    required: false,
+    default: 0,
   },
   documentation: {
     type: [mongoose.Schema.Types.ObjectId],

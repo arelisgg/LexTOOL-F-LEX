@@ -2,25 +2,35 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type LemmaType {
+  lemma: String!
+}
+
 type EntryType {
   id: ID!
-  lemma: String!
-  letter: String
+  letter: [String!]
+  lemma: [LemmaType!]
   context: String!
   UF: String!
   source: String!
   selected: Boolean!
+  criteria: String
+  included: String
+  frecuency: String
   documentation: [String!]
 }
 
 type CreatedEntryType {
   id: ID!
-  lemma: String!
-  letter: String
+  lemma: [LemmaType!]
+  letter: [String!]
   context: String!
   UF: String!
   source: String!
   selected: Boolean!
+  criteria: String
+  included: String
+  frecuency: String
   documentation: [String!]
 }
 
@@ -97,9 +107,15 @@ type Query {
   getEntryByIDWithDocs(entryID: String!): EntryType!
   findAllEntriesWithSourceRef: [EntryType!]!
   getAllEntriesBySourceID(sourceID: String!): [EntryType!]!
-  getAllSelectedEntries: [EntryType!]!
+  getAllEntriesToDocument: [EntryType!]!
+  getAllEntriesToSelect: [EntryType!]!
+  getAllIncludedEntries: [EntryType!]!
+  getAllEntriesOfLemario: [EntryType!]!
+  getAllExcludedEntries: [EntryType!]!
   getSourceByID(sourceID: String!): TypeSource!
   findAllSources: [TypeSource!]!
+  findAllDocumentationtionSources: [TypeSource!]!
+  findAllExtractionSources: [TypeSource!]!
   getAllOcurrenceRecords: [OcurrenceRecordType!]!
   getOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
   getAllThemes: [ThemeType!]!
@@ -144,6 +160,7 @@ type Mutation {
   deleteEntryDocByID(orID: String!, entryID: String!): EntryType!
   updateEntryByID(newEntry: EditedEntryType!): EntryType!
   updateEntryDocumentation(newEntry: EditedEntryType!): EntryType!
+  updateEntryFrecuency(entryID: String!): EntryType!
   createSource(source: NewSourcesType!): CreatedSourcesType!
   deleteSourceByID(SourceID: String!): TypeSource!
   updateSourceByID(source: EditedSource!): TypeSource!
@@ -169,12 +186,19 @@ input NewLemarioType {
 }
 
 input NewEntryType {
-  lemma: String!
-  letter: String
+  lemma: [NewLemmaType!]
+  letter: [String!]
   context: String!
   UF: String!
   source: String!
   selected: Boolean!
+  criteria: String
+  included: String
+  frecuency: String
+}
+
+input NewLemmaType {
+  lemma: String!
 }
 
 input EditedLemarioType {
@@ -184,12 +208,15 @@ input EditedLemarioType {
 
 input EditedEntryType {
   id: ID!
-  lemma: String
-  letter: String
+  lemma: [NewLemmaType!]
+  letter: [String!]
   context: String
   UF: String
   source: String
   selected: Boolean
+  criteria: String
+  included: String
+  frecuency: String
   documentation: [String!]
 }
 

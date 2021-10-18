@@ -5,7 +5,7 @@ export const DictionarySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  reference: {
+  description: {
     type: String,
     required: true,
     default: null,
@@ -13,16 +13,14 @@ export const DictionarySchema = new mongoose.Schema({
   state: {
     type: String,
     required: true,
-    default: null,
   },
-  description: {
+  dictionaryType: {
     type: String,
     required: true,
     default: null,
   },
-  lemario: {
+  image: {
     type: String,
-    required: false,
-    default: null,
+    required: true,
   },
 });

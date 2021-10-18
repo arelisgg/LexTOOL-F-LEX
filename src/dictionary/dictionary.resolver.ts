@@ -22,35 +22,11 @@ export class DictionaryResolver {
      return this.DictionaryService.findByID(dictionaryID);
     }
 
-    @Query(() => LemarioType)
-     async getLemarioByDictionaryID(@Args('dictionaryID') dictionaryID: String) {
-     return this.DictionaryService.getLemarioByDictionaryID(dictionaryID);
-    }
 
     @Mutation(() => CreatedDictionaryType)
      async createDictionary(@Args('createdDictionary') createdDictionary: NewDictionaryType) {
      return await this.DictionaryService.createDictionary(createdDictionary);
     }
-
-    @Mutation(() => DictionaryType)
-     async createLemarioByDictionaryID( 
-        @Args('newLemario') newLemario: NewLemarioType, 
-        @Args('dictionaryID') dictionaryID: String
-      ){
-      return this.DictionaryService.createLemarioByDictionaryID( 
-          newLemario,
-          dictionaryID
-       );
-   }
-
-   @Mutation(() => DictionaryType)
-     async addSourcesToDictionary(  
-        @Args('dictionaryID') dictionaryID: String
-      ){
-      return this.DictionaryService.addSourcesToDictionary( 
-          dictionaryID
-       );
-   }
 
    @Mutation(() => DictionaryType)
    async deleteDictionaryByID(

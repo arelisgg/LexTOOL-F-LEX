@@ -58,14 +58,79 @@ export class EntryService {
     return entriesOfTheSource;
   }
 
-  async getAllSelectedEntries(): Promise<EntryType[]> {
+  async getAllIncludedEntries(): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+
+    let includedEntries = [];
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        if (e.selected && e.included === 'Incluida') {
+          if (e.letter.length < 1) {
+            includedEntries.push(e);
+          }
+        }
+      }
+    }
+    return includedEntries;
+  }
+
+  async getAllEntriesOfLemario(): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+
+    let lemarioEntries = [];
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        if (e.selected && e.included === 'Incluida') {
+          if (e.letter.length > 0) {
+            lemarioEntries.push(e);
+          }
+        }
+      }
+    }
+    return lemarioEntries;
+  }
+
+  async getAllExcludedEntries(): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+
+    let excludedEntries = [];
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        if (e.selected && e.included === 'Excluida') {
+          excludedEntries.push(e);
+        }
+      }
+    }
+    return excludedEntries;
+  }
+
+  async getAllEntriesToSelect(): Promise<EntryType[]> {
+    const entries = await this.getAllEntries();
+
+    let entriesToSelect = [];
+    if (entries.length > 0) {
+      for (let i = 0; i < entries.length; i++) {
+        const e = entries[i];
+        const frecuency = e.frecuency;
+        if (!e.selected && frecuency !== '') {
+          entriesToSelect.push(e);
+        }
+      }
+    }
+    return entriesToSelect;
+  }
+
+  async getAllEntriesToDocument(): Promise<EntryType[]> {
     const entries = await this.getAllEntries();
 
     let selectedEntries = [];
     if (entries.length > 0) {
       for (let i = 0; i < entries.length; i++) {
         const e = entries[i];
-        if (e.selected) {
+        if (!e.selected) {
           selectedEntries.push(e);
         }
       }
@@ -81,6 +146,9 @@ export class EntryService {
       context,
       source,
       selected,
+      criteria,
+      included,
+      frecuency,
     } = createdEntry;
 
     const e = new this.entryModel({
@@ -90,6 +158,9 @@ export class EntryService {
       context,
       source,
       selected,
+      criteria,
+      included,
+      frecuency,
     });
     await e.save();
     return e;
@@ -145,6 +216,9 @@ export class EntryService {
       oldEntry.letter = newEntry.letter;
       oldEntry.source = newEntry.source;
       oldEntry.selected = newEntry.selected;
+      oldEntry.criteria = newEntry.criteria;
+      oldEntry.included = newEntry.included;
+      oldEntry.frecuency = newEntry.frecuency;
 
       oldEntry.save();
       console.log('oldEntry:', oldEntry);
@@ -168,6 +242,31 @@ export class EntryService {
           oldEntry.documentation.push(d[index]);
         }
       }
+      oldEntry.save();
+      return oldEntry;
+    } else {
+      throw new Error('No existe la entrada');
+    }
+  }
+
+  async editEntryFrecuency(entryID: String) {
+    let oldEntry = await this.entryModel
+      .findById(entryID)
+      .exec();
+    if (oldEntry) {
+      var totalApariciones: number;
+      totalApariciones = 0;
+      let d = oldEntry.documentation;
+      var totalFuentes = d.length;
+      for (let index = 0; index < d.length; index++) {
+        const element = d[index];
+        const or = await this.orService.findByID(element);
+        var numAppearance: number = +or.numAppearance;
+        totalApariciones = (totalApariciones + numAppearance);
+      }
+      let frecuency = totalApariciones + ' apariciones en ' + totalFuentes + ' fuentes';
+      console.log(frecuency);
+      oldEntry.frecuency = frecuency;
       oldEntry.save();
       return oldEntry;
     } else {

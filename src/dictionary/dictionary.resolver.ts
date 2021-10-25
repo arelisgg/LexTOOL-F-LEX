@@ -1,34 +1,31 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import {
-  DictionaryType,
-  CreatedDictionaryType,
-  NewDictionaryType,
-  EditedDictionaryType,
+  Dictionary,
+  CreatedDictionary,
+  NewDictionary,
 } from './type/dictionary.types';
 import { DictionaryService } from './dictionary.service';
-import { LemarioType, NewLemarioType } from 'src/lemario/type/lemario.type';
 
 @Resolver()
 export class DictionaryResolver {
   constructor(private readonly DictionaryService: DictionaryService) {}
 
-    @Query(() => [DictionaryType])
+    @Query(() => [Dictionary])
       async findAllDictionariesA() {
       return await this.DictionaryService.getAllDictionariesA();
     }
   
-    @Query(() => DictionaryType)
-     async getDictionaryByID(@Args('dictionaryID') dictionaryID: String) {
-     return this.DictionaryService.findByID(dictionaryID);
+    @Query(() => Dictionary)
+     async getDictionaryByID() {
+     return this.DictionaryService.findByID();
     }
 
-
-    @Mutation(() => CreatedDictionaryType)
-     async createDictionary(@Args('createdDictionary') createdDictionary: NewDictionaryType) {
+    @Mutation(() => CreatedDictionary)
+     async createDictionary(@Args('createdDictionary') createdDictionary: NewDictionary) {
      return await this.DictionaryService.createDictionary(createdDictionary);
     }
 
-   @Mutation(() => DictionaryType)
+   @Mutation(() => Dictionary)
    async deleteDictionaryByID(
      @Args('dictionaryID') dictionaryID: String) {
      console.log('dictionaryID');

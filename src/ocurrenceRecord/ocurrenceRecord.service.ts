@@ -55,4 +55,25 @@ export class OcurrenceRecordService {
             newOcurrenceRecord,
         ).exec();
     }
+
+    async editORAppearances(newOcurrenceRecord: OcurrenceRecordType) {
+        let old = await this.OcurrenceRecordModel
+          .findById(newOcurrenceRecord.id)
+          .exec();
+        let a = newOcurrenceRecord.appearances;
+        let aOld = old.appearances;
+        if (old) {
+          for (let index = 0; index < a.length; index++) {
+            let isIncluded = aOld.includes(a[index]);
+            if (!isIncluded) {
+                old.appearances.push(a[index]);
+            }
+          }
+          old.save();
+          return old;
+        } else {
+          throw new Error('No existe la entrada');
+        }
+      }
+    
 }

@@ -83,7 +83,7 @@ export class EntryService {
       for (let i = 0; i < entries.length; i++) {
         const e = entries[i];
         if (e.selected && e.included === 'Incluida') {
-          if (e.letter.length > 0) {
+          if (e.letter.length > 1 && e.letter[0] !== '') {
             lemarioEntries.push(e);
           }
         }

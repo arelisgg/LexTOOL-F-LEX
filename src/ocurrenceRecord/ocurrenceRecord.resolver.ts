@@ -34,4 +34,11 @@ export class OcurrenceRecordResolver {
     console.log(newOcurrenceRecord);
     return this.OcurrenceRecordService.editOcurrenceRecord(newOcurrenceRecord);
   }
+
+  @Mutation(() => OcurrenceRecordType)
+  async editORAppearances(
+    @Args('newOcurrenceRecord') newOcurrenceRecord: NewOcurrenceRecordType) {
+    console.log(newOcurrenceRecord);
+    return this.OcurrenceRecordService.editORAppearances(newOcurrenceRecord);
+  }
 }

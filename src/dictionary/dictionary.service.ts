@@ -2,25 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Dictionary } from './model/dictionary.modelinterface';
-import { NewDictionaryType, DictionaryType, CreatedDictionaryType, EditedDictionaryType } from './type/dictionary.types';
-import { LemarioService } from 'src/lemario/lemario.service';
+import { NewDictionary } from './type/dictionary.types';
 
 @Injectable()
 export class DictionaryService {
 
   constructor(
-    @InjectModel('Dictionary') private DictionaryModel: Model<Dictionary>,
-    private readonly lemarioService: LemarioService,
+    @InjectModel('Dictionary') private readonly DictionaryModel: Model<Dictionary>,
   ) { }
-
 
   async getAllDictionariesA() {
     const e = await this.DictionaryModel.find()
-
     return e;
   }
 
-  async createDictionary(createdDictionary: NewDictionaryType) {
+  async createDictionary(createdDictionary: NewDictionary) {
     const d = new this.DictionaryModel({
       description: createdDictionary.description,
       name: createdDictionary.name,
@@ -32,12 +28,9 @@ export class DictionaryService {
     return d;
   }
 
-  async findByID(dictionaryID: String) {
-    const d = await this.DictionaryModel
-      .findById(dictionaryID)
-      
-      console.log(d);
-    return d;
+  async findByID() {
+    const e = await this.DictionaryModel.find()
+    return e;
   }
 
   async deleteDictionary(dictionaryID: String) {

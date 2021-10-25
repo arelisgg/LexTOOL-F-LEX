@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { EntryModule } from './entry/entry.module';
+import { DictionaryModule } from './dictionary/dictionary.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LemarioModule } from './lemario/lemario.module';
 import { SourcesModule } from './sources/sources.module';
@@ -19,6 +20,7 @@ import { NomenclatorModule } from './nomenclators/nomenclator.module';
     GraphQLModule.forRoot({ autoSchemaFile: 'schema.gql' }),
     LemarioModule,
     NomenclatorModule,
+    DictionaryModule,
     MinioModule,
   ],
 })

@@ -2,6 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Dictionary {
+  id: ID!
+  name: String!
+  dictionaryType: String!
+  description: String!
+  state: String!
+  image: String
+}
+
+type CreatedDictionary {
+  id: ID!
+  name: String!
+  dictionaryType: String!
+  description: String!
+  state: String!
+  image: String
+}
+
 type LemmaType {
   lemma: String!
 }
@@ -123,6 +141,8 @@ type Query {
   getAllSessionsP: [Session_pType!]!
   getAllTypologies: [TypologyType!]!
   getAllGenres: [GenreType!]!
+  findAllDictionariesA: [Dictionary!]!
+  getDictionaryByID: Dictionary!
 }
 
 type TypeSource {
@@ -167,6 +187,7 @@ type Mutation {
   createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): CreatedOcurrenceRecordType!
   deleteOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
   editOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
+  editORAppearances(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
   createNomenclator(newNomenclator: NewNomenclatorType!): NomenclatorType!
   addTheme(newTheme: NewThemeType!): NomenclatorType!
   addGenres(newGenre: NewGenreType!): NomenclatorType!
@@ -178,6 +199,8 @@ type Mutation {
   deleteSessionP(nombre: String!): NomenclatorType!
   deleteTypology(nombre: String!): NomenclatorType!
   deleteDictionaryType(nombre: String!): NomenclatorType!
+  createDictionary(createdDictionary: NewDictionary!): CreatedDictionary!
+  deleteDictionaryByID(dictionaryID: String!): Dictionary!
 }
 
 input NewLemarioType {
@@ -335,4 +358,12 @@ input NewDictionaryTypeType {
 
 input NewTypologyType {
   nombre: String!
+}
+
+input NewDictionary {
+  name: String!
+  dictionaryType: String!
+  description: String!
+  state: String!
+  image: String
 }

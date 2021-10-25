@@ -1,7 +1,7 @@
 import { InputType, ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
-export class DictionaryType {
+export class Dictionary {
   @Field(() => ID)
   id?: String;
   @Field()
@@ -18,7 +18,7 @@ export class DictionaryType {
 
 
 @ObjectType()
-export class CreatedDictionaryType {
+export class CreatedDictionary {
   @Field(() => ID)
   id?: String;
   @Field()
@@ -35,9 +35,7 @@ export class CreatedDictionaryType {
 }
 
 @InputType()
-export class NewDictionaryType {
-  @Field(() => ID)
-  id?: String;
+export class NewDictionary {
   @Field()
   name: String;
   @Field()
@@ -51,7 +49,7 @@ export class NewDictionaryType {
 }
 
 @InputType()
-export class EditedDictionaryType {
+export class EditedDictionary {
   @Field(() => ID)
   id?: String;
   @Field()

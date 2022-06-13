@@ -187,7 +187,7 @@ type Mutation {
   createOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): CreatedOcurrenceRecordType!
   deleteOcurrenceRecordByID(orID: String!): OcurrenceRecordType!
   editOcurrenceRecord(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
-  editORAppearances(newOcurrenceRecord: NewOcurrenceRecordType!): OcurrenceRecordType!
+  editORAppearances(newOcurrenceRecord: EditedOcurrenceRecordType!): OcurrenceRecordType!
   createNomenclator(newNomenclator: NewNomenclatorType!): NomenclatorType!
   addTheme(newTheme: NewThemeType!): NomenclatorType!
   addGenres(newGenre: NewGenreType!): NomenclatorType!
@@ -330,6 +330,15 @@ input NewOcurrenceRecordType {
 
 input NewAppearanceType {
   useContext: String!
+}
+
+input EditedOcurrenceRecordType {
+  id: ID!
+  source: String!
+  numAppearance: Float!
+  appearances: [NewAppearanceType!]
+  isVariation: Boolean
+  variationUF: String
 }
 
 input NewNomenclatorType {

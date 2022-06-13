@@ -31,5 +31,4 @@ export class DictionaryResolver {
      console.log('dictionaryID');
      return this.DictionaryService.deleteDictionary(dictionaryID);
    }
-
 }

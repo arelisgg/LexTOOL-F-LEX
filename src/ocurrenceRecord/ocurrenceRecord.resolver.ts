@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { OcurrenceRecord } from './model/ocurrenceRecord.modelinterface';
-import { CreatedOcurrenceRecordType, NewOcurrenceRecordType, OcurrenceRecordType } from './type/ocurrenceRecord.type';
+import { CreatedOcurrenceRecordType, EditedOcurrenceRecordType, NewOcurrenceRecordType, OcurrenceRecordType } from './type/ocurrenceRecord.type';
 import { OcurrenceRecordService } from './ocurrenceRecord.service';
 
 @Resolver()
@@ -37,7 +37,7 @@ export class OcurrenceRecordResolver {
 
   @Mutation(() => OcurrenceRecordType)
   async editORAppearances(
-    @Args('newOcurrenceRecord') newOcurrenceRecord: NewOcurrenceRecordType) {
+    @Args('newOcurrenceRecord') newOcurrenceRecord: EditedOcurrenceRecordType) {
     console.log(newOcurrenceRecord);
     return this.OcurrenceRecordService.editORAppearances(newOcurrenceRecord);
   }
